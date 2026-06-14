@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Адмінка — Партнери</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Inter,sans-serif;
+}
+
+body{
+min-height:100vh;
+background:
+linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#7c3aed 100%);
+padding:48px;
+color:white;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+h1{
+font-size:42px;
+font-weight:800;
+margin-bottom:28px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:28px;
+padding:32px;
+box-shadow:
+0 12px 40px rgba(0,0,0,.25);
+}
+
+form{
+display:grid;
+grid-template-columns:
+1fr
+1fr
+1.2fr
+220px
+auto;
+gap:16px;
+align-items:center;
+}
+
+input,
+textarea{
+width:100%;
+padding:16px 18px;
+border:none;
+outline:none;
+border-radius:16px;
+background:rgba(255,255,255,.09);
+color:white;
+font-size:15px;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:rgba(255,255,255,.55);
+}
+
+textarea{
+height:58px;
+resize:none;
+}
+
+.upload-box{
+position:relative;
+height:58px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:16px;
+background:rgba(255,255,255,.08);
+border:2px dashed rgba(255,255,255,.18);
+cursor:pointer;
+font-size:14px;
+color:rgba(255,255,255,.7);
+overflow:hidden;
+}
+
+.upload-box input{
+position:absolute;
+inset:0;
+opacity:0;
+cursor:pointer;
+}
+
+button{
+height:58px;
+padding:0 26px;
+border:none;
+border-radius:16px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+background:linear-gradient(135deg,#60a5fa,#3b82f6);
+color:white;
+transition:.2s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(59,130,246,.35);
+}
+
+#partnersList{
+margin-top:28px;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:20px;
+}
+
+.partner-item{
+background:rgba(255,255,255,.07);
+border-radius:22px;
+padding:18px;
+backdrop-filter:blur(10px);
+}
+
+.partner-item img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:16px;
+margin-bottom:14px;
+}
+
+.partner-item h3{
+font-size:20px;
+margin-bottom:8px;
+}
+
+.partner-item p{
+color:rgba(255,255,255,.72);
+margin-bottom:10px;
+}
+
+.partner-item a{
+color:#93c5fd;
+text-decoration:none;
+}
+
+@media(max-width:1100px){
+form{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Партнери</h1>
+
+<div class="card">
+
+<form
+id="partnerForm"
+enctype="multipart/form-data"
+>
+
+<input
+name="name"
+placeholder="Назва партнера"
+required
+>
+
+<input
+name="website_url"
+placeholder="Сайт"
+>
+
+<textarea
+name="description"
+placeholder="Опис"
+></textarea>
+
+<label class="upload-box">
+<span>Завантажити логотип</span>
+<input
+type="file"
+name="logo"
+accept="image/*"
+>
+</label>
+
+<button type="submit">
+Зберегти
+</button>
+
+</form>
+
+<div id="partnersList"></div>
+
+</div>
+</div>
+
+<script>
+const API = "http://localhost:5000/api/partners";
+
+let editingId = null;
+
+const form = document.getElementById("partnerForm");
+const list = document.getElementById("partnersList");
+
+async function loadPartners() {
+  const res = await fetch(API);
+  const data = await res.json();
+
+  list.innerHTML = data.map(partner => `
+    <div class="partner-item">
+      <img
+        src="${
+          partner.logo_url
+            ? "http://localhost:5000" + partner.logo_url
+            : "team-placeholder.avif"
+        }"
+        alt="${partner.name}"
+      >
+
+      <h3>${partner.name}</h3>
+
+      <p>${partner.description || ""}</p>
+
+      ${
+        partner.website_url
+          ? `
+            <a href="${partner.website_url}" target="_blank">
+              ${partner.website_url}
+            </a>
+          `
+          : ""
+      }
+
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button
+          type="button"
+          onclick='editPartner(${JSON.stringify(partner)})'
+        >
+          Редагувати
+        </button>
+
+        <button
+          type="button"
+          onclick="deletePartner('${partner.id}')"
+          style="background:#ef4444;"
+        >
+          Видалити
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function editPartner(partner) {
+  editingId = partner.id;
+
+  form.elements.name.value =
+    partner.name || "";
+
+  form.elements.website_url.value =
+    partner.website_url || "";
+
+  form.elements.description.value =
+    partner.description || "";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+async function deletePartner(id) {
+  await fetch(API + "/" + id, {
+    method: "DELETE"
+  });
+
+  loadPartners();
+}
+
+form.onsubmit = async e => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  const method = editingId ? "PUT" : "POST";
+  const url = editingId ? API + "/" + editingId : API;
+
+  await fetch(url, {
+    method,
+    body: formData
+  });
+
+  form.reset();
+  editingId = null;
+
+  loadPartners();
+};
+
+loadPartners();
+</script>
+
+</body>
+</html>

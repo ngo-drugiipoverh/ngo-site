@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Адмінка — Про нас</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+body{
+min-height:100vh;
+padding:44px;
+color:white;
+background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#7c3aed 100%);
+}
+.container{max-width:1200px;margin:auto}
+h1{font-size:44px;margin-bottom:28px}
+h2{font-size:26px;margin:30px 0 16px}
+.form-card{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+padding:30px;
+backdrop-filter:blur(18px);
+}
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+.full{grid-column:1/-1}
+input,textarea{
+width:100%;
+padding:15px 16px;
+border:none;
+border-radius:15px;
+background:rgba(255,255,255,.10);
+color:white;
+outline:none;
+font-size:15px;
+}
+textarea{min-height:100px;resize:vertical}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.55)}
+.section-box{
+margin-top:18px;
+padding:20px;
+border-radius:22px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.10);
+}
+button{
+margin-top:26px;
+width:100%;
+height:58px;
+border:none;
+border-radius:18px;
+font-size:17px;
+font-weight:800;
+cursor:pointer;
+color:white;
+background:linear-gradient(135deg,#60a5fa,#3b82f6);
+}
+.message{margin-top:18px;opacity:.85}
+@media(max-width:800px){
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Адмінка — Про нас</h1>
+
+<form id="aboutForm" class="form-card">
+
+<h2>Hero-блок</h2>
+
+<div class="form-grid">
+<input name="hero_pill" placeholder="Плашка: Сторінка 2">
+<input name="hero_title" placeholder="Заголовок: Про нас">
+
+<textarea class="full" name="hero_description" placeholder="Опис hero"></textarea>
+
+<input name="hero_primary_text" placeholder="Текст кнопки 1">
+<input name="hero_primary_url" placeholder="URL кнопки 1">
+
+<input name="hero_secondary_text" placeholder="Текст кнопки 2">
+<input name="hero_secondary_url" placeholder="URL кнопки 2">
+</div>
+
+<h2>Статистика в hero</h2>
+
+<div class="section-box">
+<div class="form-grid">
+<input name="stat_1_number" placeholder="Статистика 1: число">
+<input name="stat_1_label" placeholder="Статистика 1: текст">
+
+<input name="stat_2_number" placeholder="Статистика 2: число">
+<input name="stat_2_label" placeholder="Статистика 2: текст">
+
+<input name="stat_3_number" placeholder="Статистика 3: число">
+<input name="stat_3_label" placeholder="Статистика 3: текст">
+</div>
+</div>
+
+<h2>Картка справа</h2>
+
+<div class="form-grid">
+<input name="hero_card_badge" placeholder="Бейдж картки">
+<input name="hero_card_title" placeholder="Заголовок картки">
+
+<textarea class="full" name="hero_card_text" placeholder="Текст картки"></textarea>
+
+<input name="hero_card_item_1" placeholder="Пункт 1">
+<input name="hero_card_item_2" placeholder="Пункт 2">
+<input name="hero_card_item_3" placeholder="Пункт 3">
+</div>
+
+<h2>Про організацію</h2>
+
+<div class="form-grid">
+<input name="about_title" placeholder="Заголовок секції">
+<input name="about_description" placeholder="Опис секції">
+<textarea class="full" name="about_text" placeholder="Основний текст"></textarea>
+</div>
+
+<h2>Місія, візія та цінності</h2>
+
+<div class="form-grid">
+<input name="mvv_title" placeholder="Заголовок секції">
+<input name="mvv_description" placeholder="Опис секції">
+</div>
+
+<div class="section-box">
+<div class="form-grid">
+<input name="mvv_1_icon" placeholder="Іконка 1">
+<input name="mvv_1_title" placeholder="Картка 1: заголовок">
+<input class="full" name="mvv_1_description" placeholder="Картка 1: опис">
+
+<input name="mvv_2_icon" placeholder="Іконка 2">
+<input name="mvv_2_title" placeholder="Картка 2: заголовок">
+<input class="full" name="mvv_2_description" placeholder="Картка 2: опис">
+
+<input name="mvv_3_icon" placeholder="Іконка 3">
+<input name="mvv_3_title" placeholder="Картка 3: заголовок">
+<input class="full" name="mvv_3_description" placeholder="Картка 3: опис">
+</div>
+</div>
+
+<h2>Основні напрями</h2>
+
+<div class="form-grid">
+<input name="directions_title" placeholder="Заголовок секції">
+<input name="directions_description" placeholder="Опис секції">
+</div>
+
+<div class="section-box">
+<div class="form-grid">
+<input name="direction_1_title" placeholder="Напрям 1: заголовок">
+<input name="direction_1_description" placeholder="Напрям 1: опис">
+<input name="direction_1_link_text" placeholder="Напрям 1: текст посилання">
+<input name="direction_1_link_url" placeholder="Напрям 1: URL">
+
+<input name="direction_2_title" placeholder="Напрям 2: заголовок">
+<input name="direction_2_description" placeholder="Напрям 2: опис">
+<input name="direction_2_link_text" placeholder="Напрям 2: текст посилання">
+<input name="direction_2_link_url" placeholder="Напрям 2: URL">
+
+<input name="direction_3_title" placeholder="Напрям 3: заголовок">
+<input name="direction_3_description" placeholder="Напрям 3: опис">
+<input name="direction_3_link_text" placeholder="Напрям 3: текст посилання">
+<input name="direction_3_link_url" placeholder="Напрям 3: URL">
+
+<input name="direction_4_title" placeholder="Напрям 4: заголовок">
+<input name="direction_4_description" placeholder="Напрям 4: опис">
+<input name="direction_4_link_text" placeholder="Напрям 4: текст посилання">
+<input name="direction_4_link_url" placeholder="Напрям 4: URL">
+</div>
+</div>
+
+<h2>CTA-блок</h2>
+
+<div class="form-grid">
+<input name="cta_title" placeholder="Заголовок CTA">
+<textarea class="full" name="cta_text" placeholder="Текст CTA"></textarea>
+
+<input name="cta_button_1_text" placeholder="Кнопка 1: текст">
+<input name="cta_button_1_url" placeholder="Кнопка 1: URL">
+
+<input name="cta_button_2_text" placeholder="Кнопка 2: текст">
+<input name="cta_button_2_url" placeholder="Кнопка 2: URL">
+
+<input name="cta_button_3_text" placeholder="Кнопка 3: текст">
+<input name="cta_button_3_url" placeholder="Кнопка 3: URL">
+</div>
+
+<button type="submit">Зберегти сторінку</button>
+
+<p id="aboutMessage" class="message"></p>
+
+</form>
+
+</div>
+
+<script>
+const API = "http://localhost:5000/api/about";
+
+const form =
+document.getElementById("aboutForm");
+
+const message =
+document.getElementById("aboutMessage");
+
+async function loadAbout(){
+try{
+const response = await fetch(API);
+const data = await response.json();
+
+const page = data.page || {};
+
+for(const key in page){
+if(form.elements[key]){
+form.elements[key].value = page[key] || "";
+}
+}
+
+(data.stats || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`stat_${i}_number`]){
+form.elements[`stat_${i}_number`].value = item.number_text || "";
+}
+
+if(form.elements[`stat_${i}_label`]){
+form.elements[`stat_${i}_label`].value = item.label || "";
+}
+});
+
+(data.mvv || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`mvv_${i}_icon`]){
+form.elements[`mvv_${i}_icon`].value = item.icon || "";
+}
+
+if(form.elements[`mvv_${i}_title`]){
+form.elements[`mvv_${i}_title`].value = item.title || "";
+}
+
+if(form.elements[`mvv_${i}_description`]){
+form.elements[`mvv_${i}_description`].value = item.description || "";
+}
+});
+
+(data.directions || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`direction_${i}_title`]){
+form.elements[`direction_${i}_title`].value = item.title || "";
+}
+
+if(form.elements[`direction_${i}_description`]){
+form.elements[`direction_${i}_description`].value = item.description || "";
+}
+
+if(form.elements[`direction_${i}_link_text`]){
+form.elements[`direction_${i}_link_text`].value = item.link_text || "";
+}
+
+if(form.elements[`direction_${i}_link_url`]){
+form.elements[`direction_${i}_link_url`].value = item.link_url || "";
+}
+});
+
+}catch(error){
+console.error(error);
+message.textContent = "Помилка завантаження";
+}
+}
+
+form.addEventListener("submit", async e=>{
+e.preventDefault();
+
+message.textContent = "Збереження...";
+
+try{
+const data = Object.fromEntries(new FormData(form));
+
+const response = await fetch(API,{
+method:"PUT",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify(data)
+});
+
+const result = await response.json();
+
+if(!response.ok){
+throw new Error(result.error || "Помилка");
+}
+
+message.textContent = "Сторінку збережено";
+
+await loadAbout();
+
+}catch(error){
+console.error(error);
+message.textContent = "Помилка: " + error.message;
+}
+});
+
+loadAbout();
+</script>
+
+</body>
+</html>

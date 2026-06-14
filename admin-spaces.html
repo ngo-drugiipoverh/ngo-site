@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Редагувати простір — Другий поверх</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<main class="section">
+<div class="container">
+
+<div class="section-head">
+<h1>Редагування сторінки «Другий поверх»</h1>
+<p>Оновлення тексту, фото та інформації про простір.</p>
+</div>
+
+<form
+id="spaceAdminForm"
+class="apply-form"
+enctype="multipart/form-data"
+>
+
+<div class="form-grid">
+
+<label class="field field-full">
+<span>Заголовок</span>
+<input
+type="text"
+name="title"
+value="Другий поверх"
+required
+/>
+</label>
+
+<label class="field field-full">
+<span>Опис</span>
+<textarea
+name="description"
+rows="6"
+required
+></textarea>
+</label>
+
+<label class="field">
+<span>Фото обкладинки</span>
+<input
+type="file"
+name="cover_image"
+accept="image/*"
+/>
+</label>
+
+<label class="field">
+<span>Фото бронювання</span>
+<input
+type="file"
+name="booking_image"
+accept="image/*"
+/>
+</label>
+
+<label class="field field-full">
+<span>Текст про коворкінг</span>
+<textarea
+name="coworking_text"
+rows="6"
+></textarea>
+</label>
+
+<label class="field field-full">
+<span>Текст про студію</span>
+<textarea
+name="studio_text"
+rows="6"
+></textarea>
+</label>
+
+</div>
+
+<div class="form-actions">
+<button
+class="btn btn-primary"
+type="submit"
+>
+Зберегти
+</button>
+
+<p
+id="spaceAdminMessage"
+class="form-hint"
+></p>
+</div>
+
+</form>
+
+</div>
+</main>
+
+<script>
+const form =
+document.getElementById(
+"spaceAdminForm"
+);
+
+const message =
+document.getElementById(
+"spaceAdminMessage"
+);
+
+async function loadSpace(){
+
+try{
+
+const response =
+await fetch(
+"http://localhost:5000/api/spaces/second-floor"
+);
+
+const data =
+await response.json();
+
+if(!response.ok){
+return;
+}
+
+form.title.value =
+data.name || "";
+
+form.description.value =
+data.description || "";
+
+form.coworking_text.value =
+data.coworking_text || "";
+
+form.studio_text.value =
+data.studio_text || "";
+
+}catch(error){
+console.error(error);
+}
+
+}
+
+loadSpace();
+
+form.addEventListener(
+"submit",
+async e=>{
+
+e.preventDefault();
+
+const formData =
+new FormData(form);
+
+message.textContent =
+"Збереження...";
+
+try{
+
+const response =
+await fetch(
+"http://localhost:5000/api/spaces/second-floor",
+{
+method:"PUT",
+body:formData
+}
+);
+
+const data =
+await response.json();
+
+if(!response.ok){
+throw new Error(
+data.error ||
+"Помилка"
+);
+}
+
+message.textContent =
+"Збережено успішно";
+
+}catch(error){
+
+console.error(error);
+
+message.textContent =
+`Помилка: ${error.message}`;
+
+}
+
+}
+);
+</script>
+
+</body>
+</html>

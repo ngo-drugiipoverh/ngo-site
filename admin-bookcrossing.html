@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <title>Адмінка — Буккросинг</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<main class="section">
+<div class="container">
+
+<div class="section-head">
+<h1>Адмінка — Буккросинг</h1>
+<p>Книги та ігри</p>
+</div>
+
+<form
+id="libraryForm"
+class="apply-form"
+enctype="multipart/form-data"
+style="margin-bottom:40px;"
+>
+
+<input type="hidden" name="id">
+
+<div class="form-grid">
+
+<label class="field">
+<span>Назва</span>
+<input
+type="text"
+name="title"
+required
+>
+</label>
+
+<label class="field">
+<span>Тип</span>
+
+<select
+name="item_type"
+id="itemType"
+required
+>
+<option value="book">
+Книга
+</option>
+
+<option value="game">
+Гра
+</option>
+</select>
+
+</label>
+
+<label class="field">
+<span>Автор</span>
+<input
+type="text"
+name="author"
+>
+</label>
+
+<label class="field">
+<span>Жанр</span>
+<input
+type="text"
+name="genre"
+>
+</label>
+
+<label class="field field-full">
+<span>Опис</span>
+<textarea
+name="description"
+></textarea>
+</label>
+
+<label class="field field-full">
+<span>Обкладинка</span>
+<input
+type="file"
+name="cover"
+accept="image/*"
+>
+</label>
+
+</div>
+
+<div class="form-actions">
+<button
+type="submit"
+class="btn btn-primary"
+>
+Зберегти
+</button>
+</div>
+
+</form>
+
+<div
+id="libraryList"
+class="team-grid"
+></div>
+
+</div>
+</main>
+
+<script>
+const API =
+"http://localhost:5000/api/library";
+
+const libraryForm =
+document.getElementById(
+"libraryForm"
+);
+
+const libraryList =
+document.getElementById(
+"libraryList"
+);
+
+async function loadItems() {
+
+  try {
+
+    const response =
+      await fetch(API);
+
+    const items =
+      await response.json();
+
+    libraryList.innerHTML =
+      items.map(item => `
+
+      <article class="member-card">
+
+        <div class="member-photo">
+          <img
+            src="${
+              item.cover_image_url
+                ? "http://localhost:5000" + item.cover_image_url
+                : "team-placeholder.avif"
+            }"
+            alt="${item.title}"
+          >
+        </div>
+
+        <div class="member-body">
+
+          <div class="member-name">
+            ${item.title}
+          </div>
+
+          <div class="member-role">
+            ${item.item_type}
+          </div>
+
+          <p class="member-text">
+            ${item.description || ""}
+          </p>
+
+          <div
+            style="
+            display:flex;
+            gap:10px;
+            margin-top:12px;
+          "
+          >
+
+            <button
+              class="btn btn-ghost"
+              onclick="deleteItem('${item.id}')"
+            >
+              Видалити
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+  } catch(error) {
+
+    console.error(
+      "loadItems error:",
+      error
+    );
+
+  }
+}
+
+async function deleteItem(id){
+
+  try {
+
+    await fetch(
+      API + "/" + id,
+      {
+        method:"DELETE"
+      }
+    );
+
+    loadItems();
+
+  } catch(error){
+
+    console.error(
+      "delete error:",
+      error
+    );
+
+  }
+}
+
+libraryForm.addEventListener(
+"submit",
+async (e)=>{
+
+  e.preventDefault();
+
+  const formData =
+    new FormData(
+      libraryForm
+    );
+
+  console.log(
+    "TITLE:",
+    formData.get("title")
+  );
+
+  console.log(
+    "TYPE:",
+    formData.get("item_type")
+  );
+
+  console.log(
+    "AUTHOR:",
+    formData.get("author")
+  );
+
+  console.log(
+    "GENRE:",
+    formData.get("genre")
+  );
+
+  console.log(
+    "DESCRIPTION:",
+    formData.get("description")
+  );
+
+  try {
+
+    const response =
+      await fetch(
+        API,
+        {
+          method:"POST",
+          body:formData
+        }
+      );
+
+    const data =
+      await response.json();
+
+    console.log(
+      "SERVER RESPONSE:",
+      data
+    );
+
+    if (!response.ok) {
+      alert(
+        data.error ||
+        "Помилка при збереженні"
+      );
+      return;
+    }
+
+    libraryForm.reset();
+
+    loadItems();
+
+  } catch(error){
+
+    console.error(
+      "submit error:",
+      error
+    );
+
+  }
+
+});
+
+loadItems();
+</script>
+
+</body>
+</html>

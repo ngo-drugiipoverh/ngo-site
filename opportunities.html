@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ГО «Олександрійська молодь» — Можливості</title>
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+.opportunities-hero{
+position:relative;
+padding:100px 0 60px;
+overflow:hidden;
+}
+
+.opportunities-hero::before{
+content:"";
+position:absolute;
+width:380px;
+height:380px;
+border-radius:50%;
+background:rgba(214,204,93,.12);
+filter:blur(110px);
+right:8%;
+top:10%;
+}
+
+.opportunities-hero-grid{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:34px;
+align-items:center;
+position:relative;
+z-index:2;
+}
+
+.opportunities-hero-card{
+padding:30px;
+border-radius:30px;
+background:rgba(255,255,255,.10);
+border:1px solid rgba(255,255,255,.12);
+color:white;
+backdrop-filter:blur(16px);
+}
+
+.opportunities-hero-card h3{
+font-size:32px;
+margin:0 0 14px;
+}
+
+.opportunities-hero-card p{
+line-height:1.7;
+opacity:.84;
+}
+
+.opportunities-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:28px;
+margin-top:34px;
+}
+
+.opportunity-card{
+overflow:hidden;
+border-radius:30px;
+background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.04));
+border:1px solid rgba(255,255,255,.12);
+color:white;
+backdrop-filter:blur(16px);
+transition:.3s ease;
+}
+
+.opportunity-card:hover{
+transform:translateY(-7px);
+box-shadow:0 26px 70px rgba(0,0,0,.16);
+}
+
+.opportunity-photo{
+height:230px;
+overflow:hidden;
+background:rgba(255,255,255,.06);
+}
+
+.opportunity-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition:.4s ease;
+}
+
+.opportunity-card:hover img{
+transform:scale(1.05);
+}
+
+.opportunity-body{
+padding:24px;
+}
+
+.opportunity-meta{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:16px;
+}
+
+.opportunity-badge{
+padding:7px 11px;
+border-radius:999px;
+background:rgba(214,204,93,.16);
+border:1px solid rgba(214,204,93,.22);
+color:#fff4a7;
+font-size:13px;
+font-weight:800;
+}
+
+.opportunity-body h3{
+font-size:30px;
+line-height:1.15;
+margin:0 0 14px;
+}
+
+.opportunity-short{
+font-size:16px;
+line-height:1.65;
+opacity:.84;
+margin:0 0 16px;
+}
+
+.opportunity-info{
+display:grid;
+gap:8px;
+margin:18px 0;
+font-size:14px;
+opacity:.85;
+}
+
+.opportunity-details{
+margin-top:18px;
+border-radius:18px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.10);
+overflow:hidden;
+}
+
+.opportunity-details summary{
+cursor:pointer;
+padding:14px 16px;
+font-weight:800;
+list-style:none;
+}
+
+.opportunity-details summary::-webkit-details-marker{
+display:none;
+}
+
+.opportunity-details-text{
+padding:0 16px 16px;
+line-height:1.75;
+white-space:pre-line;
+opacity:.86;
+}
+
+.opportunity-link{
+display:inline-flex;
+margin-top:18px;
+padding:12px 18px;
+border-radius:999px;
+background:rgba(255,255,255,.10);
+border:1px solid rgba(255,255,255,.12);
+color:white;
+text-decoration:none;
+font-weight:800;
+}
+
+.opportunity-link:hover{
+background:rgba(255,255,255,.17);
+}
+
+.opportunities-empty{
+color:white;
+opacity:.8;
+}
+
+@media(max-width:900px){
+.opportunities-hero-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Перейти до контенту</a>
+
+<header class="site-header">
+<div class="container header-inner">
+
+<div class="header-left">
+<button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+<span class="drawer-toggle-icon">☰</span>
+<span class="drawer-toggle-text">Меню</span>
+</button>
+
+<a class="brand" href="index.html">
+<span class="brand-mark"></span>
+<span class="brand-text">ГО «Олександрійська молодь»</span>
+</a>
+</div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+</div>
+</header>
+
+<div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+<main id="main">
+
+<section class="opportunities-hero">
+<div class="container opportunities-hero-grid">
+
+<div>
+<p class="pill" id="heroPill"></p>
+<h1 id="heroTitle"></h1>
+<p class="lead" id="heroDescription"></p>
+
+<div class="hero-actions">
+<a class="btn btn-primary" id="heroPrimary" href="#"></a>
+<a class="btn btn-ghost" id="heroSecondary" href="#"></a>
+</div>
+</div>
+
+<aside class="opportunities-hero-card">
+<h3>Тут зібрані актуальні можливості</h3>
+<p>
+Гранти, навчання, події, волонтерство та інші формати, які можуть бути корисними для молоді.
+</p>
+</aside>
+
+</div>
+</section>
+
+<section class="section section-soft" id="opportunities">
+<div class="container">
+
+<div class="section-head">
+<h2 id="sectionTitle"></h2>
+<p id="sectionDescription"></p>
+</div>
+
+<div id="opportunitiesGrid" class="opportunities-grid"></div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="join-box">
+
+<div>
+<h2 id="ctaTitle"></h2>
+<p id="ctaText"></p>
+</div>
+
+<div class="join-actions">
+<a class="btn btn-primary" id="ctaButton" href="#"></a>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="container footer-inner">
+<a class="brand small" href="index.html">
+<span class="brand-mark"></span>
+<span class="brand-text">ГО «Олександрійська молодь»</span>
+</a>
+<p>Можливості для розвитку молоді.</p>
+</div>
+</footer>
+
+<script src="drawer.js"></script>
+
+<script>
+function setText(id,value,fallback=""){
+const el = document.getElementById(id);
+if(el){
+el.textContent = value || fallback;
+}
+}
+
+function setLink(id,text,url,fallbackText,fallbackUrl){
+const el = document.getElementById(id);
+if(!el) return;
+
+el.textContent = text || fallbackText || "";
+el.href = url || fallbackUrl || "#";
+}
+
+function formatDate(date){
+return date ? new Date(date).toLocaleDateString("uk-UA") : "";
+}
+
+async function loadOpportunities(){
+try{
+
+const response =
+await fetch("http://localhost:5000/api/opportunities");
+
+const data =
+await response.json();
+
+const page =
+data.page || {};
+
+setText("heroPill", page.hero_pill, "Можливості");
+setText("heroTitle", page.hero_title, "Можливості для молоді");
+setText("heroDescription", page.hero_description, "Актуальні програми, події та ініціативи для розвитку.");
+
+setLink("heroPrimary", page.hero_primary_text, page.hero_primary_url, "Переглянути можливості", "#opportunities");
+setLink("heroSecondary", page.hero_secondary_text, page.hero_secondary_url, "Запропонувати", "contacts.html");
+
+setText("sectionTitle", page.section_title, "Актуальні можливості");
+setText("sectionDescription", page.section_description, "Обирай формат, який підходить саме тобі.");
+
+setText("ctaTitle", page.cta_title, "Маєш можливість для молоді?");
+setText("ctaText", page.cta_text, "Напиши нам, якщо хочеш розмістити можливість або запропонувати співпрацю.");
+setLink("ctaButton", page.cta_button_text, page.cta_button_url, "Зв’язатися", "contacts.html");
+
+const grid =
+document.getElementById("opportunitiesGrid");
+
+const items =
+data.opportunities || [];
+
+if(!items.length){
+grid.innerHTML =
+`<p class="opportunities-empty">Можливостей поки немає.</p>`;
+return;
+}
+
+grid.innerHTML =
+items.map(item=>`
+
+<article class="opportunity-card">
+
+<div class="opportunity-photo">
+<img
+src="${item.cover_image_url ? "http://localhost:5000" + item.cover_image_url : "team-placeholder.avif"}"
+alt="${item.title}"
+>
+</div>
+
+<div class="opportunity-body">
+
+<div class="opportunity-meta">
+${item.category ? `<span class="opportunity-badge">${item.category}</span>` : ""}
+${item.format ? `<span class="opportunity-badge">${item.format}</span>` : ""}
+</div>
+
+<h3>${item.title}</h3>
+
+${item.short_description ? `<p class="opportunity-short">${item.short_description}</p>` : ""}
+
+<div class="opportunity-info">
+${item.deadline_date ? `<div>Дедлайн: ${formatDate(item.deadline_date)}</div>` : ""}
+${item.location ? `<div>Локація: ${item.location}</div>` : ""}
+</div>
+
+${
+item.full_description
+? `
+<details class="opportunity-details">
+<summary>Детальніше</summary>
+<div class="opportunity-details-text">${item.full_description}</div>
+</details>
+`
+: ""
+}
+
+${
+item.link_url
+? `
+<a
+class="opportunity-link"
+href="${item.link_url}"
+target="_blank"
+>
+${item.link_text || "Перейти →"}
+</a>
+`
+: ""
+}
+
+</div>
+</article>
+
+`).join("");
+
+}catch(error){
+console.error("Помилка завантаження можливостей:", error);
+}
+}
+
+loadOpportunities();
+</script>
+
+</body>
+</html>

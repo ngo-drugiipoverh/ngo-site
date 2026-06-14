@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ГО «Олександрійська молодь» — Контакти</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти до контенту</a>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <div class="header-left">
+        <button class="drawer-toggle" type="button" aria-controls="siteDrawer">
+          ☰ Меню
+        </button>
+
+        <a class="brand" href="index.html">
+          <span class="brand-mark"></span>
+          <span class="brand-text">ГО «Олександрійська молодь»</span>
+        </a>
+      </div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+    </div>
+  </header>
+
+  <!-- DRAWER -->
+  <div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <h1>Контакти</h1>
+        <p class="lead">
+          Зв’яжіться з нами або залиште заявку — ми відповімо найближчим часом.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section class="section section-soft">
+      <div class="container contacts-grid">
+
+        <!-- ЛОКАЦІЯ -->
+        <div class="contact-card">
+          <h2>Локація</h2>
+          <p>м. Олександрія, вул. (вкажи адресу)</p>
+
+          <!-- карта (можеш замінити координати) -->
+          <iframe 
+            src="https://maps.google.com/maps?q=Oleksandriia&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="200" style="border:0;"></iframe>
+        </div>
+
+        <!-- КОНТАКТИ -->
+        <div class="contact-card">
+          <h2>Зв’язок</h2>
+          <p><strong>Телефон:</strong> +380 ХХ ХХХ ХХ ХХ</p>
+          <p><strong>Email:</strong> example@gmail.com</p>
+          <p><strong>Telegram:</strong> @username</p>
+          <p><strong>Instagram:</strong> @username</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="section">
+      <div class="container form-box">
+        <h2>Форма зворотнього зв’язку</h2>
+
+       <form id="contactForm">
+  <div class="form-group">
+    <label>Ім’я</label>
+    <input name="sender_name" type="text" placeholder="Ваше ім’я" required>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input name="sender_email" type="email" placeholder="Ваш email">
+  </div>
+
+  <div class="form-group">
+    <label>Телефон</label>
+    <input name="sender_phone" type="text" placeholder="+380...">
+  </div>
+
+  <div class="form-group">
+    <label>Повідомлення</label>
+    <textarea name="message_text" placeholder="Ваше повідомлення" rows="4" required></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Надіслати</button>
+  <p id="contactMessage"></p>
+</form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© ГО «Олександрійська молодь»</p>
+    </div>
+  </footer>
+
+  <script src="drawer.js"></script>
+
+  <style>
+    .contacts-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .contact-card{
+      background:rgba(255,255,255,.1);
+      padding:20px;
+      border-radius:20px;
+      color:#fff;
+    }
+
+    .form-box{
+      background:rgba(255,255,255,.1);
+      padding:20px;
+      border-radius:20px;
+      color:#fff;
+      max-width:600px;
+    }
+
+    .form-group{
+      margin-bottom:15px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    input, textarea{
+      padding:10px;
+      border-radius:10px;
+      border:none;
+    }
+
+    @media(max-width:800px){
+      .contacts-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+  <script>
+const contactForm = document.getElementById("contactForm");
+const contactMessage = document.getElementById("contactMessage");
+
+contactForm.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(
+    new FormData(contactForm)
+  );
+
+  contactMessage.textContent = "Надсилання...";
+
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/contacts",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Помилка");
+    }
+
+    contactMessage.textContent = "Повідомлення надіслано.";
+    contactForm.reset();
+
+  } catch (error) {
+    contactMessage.textContent = "Помилка: " + error.message;
+  }
+});
+</script>
+</body>
+</html>

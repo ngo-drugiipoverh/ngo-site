@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Адмінка — Заявки</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Inter,Arial,sans-serif;
+}
+
+body{
+min-height:100vh;
+padding:48px;
+color:white;
+background:
+linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#7c3aed 100%);
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+h1{
+font-size:44px;
+margin-bottom:12px;
+}
+
+.subtitle{
+opacity:.75;
+margin-bottom:32px;
+font-size:17px;
+}
+
+.requests-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+gap:22px;
+}
+
+.request-card{
+background:rgba(255,255,255,.09);
+border:1px solid rgba(255,255,255,.13);
+backdrop-filter:blur(18px);
+border-radius:28px;
+padding:24px;
+box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
+
+.request-top{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:flex-start;
+margin-bottom:16px;
+}
+
+.request-name{
+font-size:24px;
+font-weight:800;
+}
+
+.badge{
+padding:7px 12px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+background:rgba(255,255,255,.12);
+}
+
+.request-info{
+display:grid;
+gap:8px;
+margin-bottom:18px;
+color:rgba(255,255,255,.78);
+font-size:15px;
+}
+
+.request-info a{
+color:#bfdbfe;
+text-decoration:none;
+}
+
+.message{
+line-height:1.65;
+color:rgba(255,255,255,.9);
+background:rgba(255,255,255,.07);
+border-radius:18px;
+padding:16px;
+margin-bottom:18px;
+white-space:pre-line;
+}
+
+.actions{
+display:flex;
+gap:10px;
+}
+
+button{
+height:44px;
+padding:0 16px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+color:white;
+background:#3b82f6;
+}
+
+.delete-btn{
+background:#ef4444;
+}
+
+.empty{
+padding:32px;
+border-radius:24px;
+background:rgba(255,255,255,.08);
+color:rgba(255,255,255,.75);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Заявки з сайту</h1>
+<p class="subtitle">Повідомлення, які користувачі залишили через форму контактів.</p>
+
+<div id="requestsList" class="requests-grid"></div>
+
+</div>
+
+<script>
+const API =
+"http://localhost:5000/api/contacts";
+
+const list =
+document.getElementById("requestsList");
+
+async function loadRequests(){
+
+try{
+
+const response =
+await fetch(API);
+
+const data =
+await response.json();
+
+if(!data.length){
+list.innerHTML =
+'<div class="empty">Заявок поки немає.</div>';
+return;
+}
+
+list.innerHTML =
+data.map(item=>`
+
+<div class="request-card">
+
+<div class="request-top">
+<div class="request-name">
+${item.sender_name || "Без імені"}
+</div>
+
+<div class="badge">
+${item.status || "new"}
+</div>
+</div>
+
+<div class="request-info">
+
+${
+item.sender_email
+? `<div>Email: <a href="mailto:${item.sender_email}">${item.sender_email}</a></div>`
+: ""
+}
+
+${
+item.sender_phone
+? `<div>Телефон: ${item.sender_phone}</div>`
+: ""
+}
+
+${
+item.created_at
+? `<div>Дата: ${new Date(item.created_at).toLocaleString("uk-UA")}</div>`
+: ""
+}
+
+</div>
+
+<div class="message">
+${item.message_text || ""}
+</div>
+
+<div class="actions">
+<button
+class="delete-btn"
+onclick="deleteRequest('${item.id}')"
+>
+Видалити
+</button>
+</div>
+
+</div>
+
+`).join("");
+
+}catch(error){
+
+console.error(error);
+
+list.innerHTML =
+'<div class="empty">Помилка завантаження заявок.</div>';
+
+}
+
+}
+
+async function deleteRequest(id){
+
+if(!confirm("Видалити заявку?")){
+return;
+}
+
+await fetch(
+API + "/" + id,
+{
+method:"DELETE"
+}
+);
+
+loadRequests();
+
+}
+
+loadRequests();
+</script>
+
+</body>
+</html>

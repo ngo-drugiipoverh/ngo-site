@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ГО «Олександрійська молодь» — Новини</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Перейти до контенту</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+
+    <div class="header-left">
+      <button
+        class="drawer-toggle"
+        type="button"
+        aria-controls="siteDrawer"
+        aria-expanded="false"
+      >
+        <span class="drawer-toggle-icon">☰</span>
+        <span class="drawer-toggle-text">Меню</span>
+      </button>
+
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">
+          ГО «Олександрійська молодь»
+        </span>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+  </div>
+</header>
+
+<div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Новини</h1>
+
+    <p class="lead">
+      Анонси подій, новини простору,
+      звіти та все найцікавіше з життя
+      ГО «Олександрійська молодь».
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div
+      id="newsGrid"
+      class="news-grid"
+    ></div>
+
+    <div
+  id="newsModal"
+  class="news-modal"
+  hidden
+>
+
+  <div
+    class="news-modal-overlay"
+    onclick="closeNewsModal()"
+  ></div>
+
+  <div class="news-modal-card">
+
+    <button
+      class="news-modal-close"
+      onclick="closeNewsModal()"
+    >
+      ✕
+    </button>
+
+    <img
+      id="modalImage"
+      class="news-modal-image"
+      src=""
+      alt=""
+    >
+
+    <div class="news-modal-body">
+
+      <div
+        id="modalDate"
+        class="news-date"
+      ></div>
+
+      <h2
+        id="modalTitle"
+        class="news-modal-title"
+      ></h2>
+
+      <div
+        id="modalText"
+        class="news-modal-text"
+      ></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+
+    <div class="brand small">
+      <span class="brand-mark"></span>
+      <span class="brand-text">
+        ГО «Олександрійська молодь»
+      </span>
+    </div>
+
+    <p>
+      © 2026 Всі права захищено.
+    </p>
+
+  </div>
+</footer>
+
+<script src="drawer.js"></script>
+
+<style>
+.page-hero{
+position:relative;
+padding:90px 0 54px;
+overflow:hidden;
+}
+
+.page-hero::before{
+content:"";
+position:absolute;
+top:-120px;
+right:-120px;
+width:340px;
+height:340px;
+border-radius:50%;
+background:rgba(214,204,93,.08);
+filter:blur(90px);
+pointer-events:none;
+}
+
+.page-hero::after{
+content:"";
+position:absolute;
+left:-80px;
+bottom:-80px;
+width:260px;
+height:260px;
+border-radius:50%;
+background:rgba(255,255,255,.04);
+filter:blur(80px);
+pointer-events:none;
+}
+
+.news-grid{
+display:grid;
+gap:22px;
+}
+
+.news-card{
+display:grid;
+grid-template-columns:180px 1fr;
+gap:22px;
+align-items:center;
+padding:18px;
+border-radius:26px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+transition:.25s ease;
+}
+
+.news-card:hover{
+transform:translateY(-4px);
+background:rgba(255,255,255,.07);
+border-color:rgba(214,204,93,.18);
+}
+
+.news-photo{
+position:relative;
+}
+
+.news-photo::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:18px;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(0,0,0,.14)
+);
+}
+
+.news-photo img{
+width:100%;
+height:130px;
+border-radius:18px;
+object-fit:cover;
+display:block;
+}
+
+.news-body{
+padding-right:12px;
+color:white;
+}
+
+.news-date{
+display:inline-block;
+font-size:12px;
+font-weight:700;
+letter-spacing:.08em;
+text-transform:uppercase;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(214,204,93,.14);
+color:#efe9a7;
+margin-bottom:14px;
+}
+
+.news-title{
+font-size:26px;
+line-height:1.25;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.news-excerpt{
+font-size:16px;
+line-height:1.65;
+opacity:.84;
+max-width:760px;
+}
+
+.news-grid::before{
+content:"ОСТАННІ ПУБЛІКАЦІЇ";
+font-size:13px;
+letter-spacing:.16em;
+font-weight:700;
+opacity:.45;
+margin-bottom:4px;
+}
+
+@media(max-width:900px){
+
+.news-card{
+grid-template-columns:1fr;
+}
+
+.news-photo img{
+height:220px;
+}
+
+}
+
+@media(max-width:640px){
+
+.news-title{
+font-size:22px;
+}
+
+.news-photo img{
+height:180px;
+}
+
+.page-hero{
+padding:70px 0 40px;
+}
+
+}
+
+.news-modal{
+position:fixed;
+inset:0;
+z-index:9999;
+display:none;
+align-items:center;
+justify-content:center;
+padding:24px;
+}
+
+.news-modal.open{
+display:flex;
+}
+
+.news-modal-overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(8px);
+}
+
+.news-modal-card{
+position:relative;
+z-index:2;
+width:min(720px,92%);
+max-height:82vh;
+overflow:auto;
+border-radius:28px;
+
+background:rgba(26,34,56,.72);
+backdrop-filter:blur(22px);
+
+border:1px solid rgba(255,255,255,.10);
+
+box-shadow:
+0 18px 60px rgba(0,0,0,.45),
+0 0 0 1px rgba(255,255,255,.04);
+}
+
+.news-modal-image{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+}
+
+.news-modal-body{
+padding:28px 30px;
+color:white;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.04),
+rgba(255,255,255,.02)
+);
+
+backdrop-filter:blur(12px);
+}
+
+.news-modal-title{
+font-size:34px;
+margin:0 0 18px;
+line-height:1.2;
+}
+
+.news-modal-text{
+font-size:17px;
+line-height:1.8;
+opacity:.9;
+white-space:pre-line;
+}
+
+.news-modal-close{
+position:absolute;
+top:16px;
+right:16px;
+width:42px;
+height:42px;
+border:none;
+border-radius:50%;
+background:rgba(0,0,0,.45);
+color:white;
+font-size:22px;
+cursor:pointer;
+z-index:3;
+}
+
+.news-card{
+cursor:pointer;
+}
+</style>
+
+<script>
+async function loadNews(){
+
+try{
+
+const response =
+await fetch(
+'http://localhost:5000/api/news'
+);
+
+const news =
+await response.json();
+
+const published =
+news.filter(
+item => item.status === 'published'
+);
+
+const newsGrid =
+document.getElementById(
+'newsGrid'
+);
+
+if(!published.length){
+
+newsGrid.innerHTML =
+`
+<p style="color:white;">
+Новин поки немає
+</p>
+`;
+
+return;
+}
+
+newsGrid.innerHTML =
+published.map(item=>`
+
+<article
+  class="news-card"
+  onclick='openNewsModal(${JSON.stringify(item)})'
+>
+
+<div class="news-photo">
+
+<img
+src="${
+item.cover_image_url
+? 'http://localhost:5000'+item.cover_image_url
+: 'team-placeholder.avif'
+}"
+alt="${item.title}"
+>
+
+</div>
+
+<div class="news-body">
+
+<div class="news-date">
+${
+item.published_at
+? new Date(
+item.published_at
+).toLocaleDateString('uk-UA')
+: ''
+}
+</div>
+
+<div class="news-title">
+${item.title}
+</div>
+
+<div class="news-excerpt">
+${item.excerpt || ''}
+</div>
+
+</div>
+
+</article>
+
+`).join('');
+
+}catch(error){
+
+console.error(
+'Помилка завантаження новин:',
+error
+);
+
+}
+
+}
+
+loadNews();
+
+function openNewsModal(item){
+
+document
+.getElementById("newsModal")
+.classList.add("open");
+
+document
+.getElementById("modalImage")
+.src =
+item.cover_image_url
+? "http://localhost:5000"+item.cover_image_url
+: "team-placeholder.avif";
+
+document
+.getElementById("modalTitle")
+.textContent =
+item.title || "";
+
+document
+.getElementById("modalDate")
+.textContent =
+item.published_at
+? new Date(
+item.published_at
+).toLocaleDateString("uk-UA")
+: "";
+
+document
+.getElementById("modalText")
+.textContent =
+item.content ||
+item.excerpt ||
+"";
+}
+
+function closeNewsModal(){
+
+document
+.getElementById("newsModal")
+.classList.remove("open");
+
+}
+
+document.addEventListener(
+"keydown",
+e=>{
+
+if(
+e.key === "Escape"
+){
+closeNewsModal();
+}
+
+}
+);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ГО «Олександрійська молодь» — Проєкти</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти до контенту</a>
+
+  <!-- HEADER -->
+  <header class="site-header">
+  <div class="container header-inner">
+
+    <div class="header-left">
+      <button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+        <span class="drawer-toggle-icon" aria-hidden="true">☰</span>
+        <span class="drawer-toggle-text">Меню</span>
+      </button>
+
+      <a class="brand" href="index.html" aria-label="На головну">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">ГО «Олександрійська молодь»</span>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+  </div>
+</header>
+  <!-- DRAWER -->
+  <div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <div>
+          <h1>Проєкти</h1>
+          <p class="lead">
+            Ми реалізуємо освітні, соціальні та творчі проєкти для молоді.
+            Кожен з них — це можливість розвиватися, знайомитися та створювати щось нове.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Переглянути проєкти</a>
+            <a class="btn btn-ghost" href="contacts.html">Запропонувати ідею</a>
+          </div>
+        </div>
+
+        <aside class="hero-side-card">
+          <h3>Що ми робимо?</h3>
+          <p>Освіта • Події • Ком’юніті • Партнерства • Молодіжні ініціативи</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section section-soft" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Наші проєкти</h2>
+          <p>Приклади проєктів, які реалізує команда організації.</p>
+        </div>
+
+        <div id="projectsGrid" class="projects-grid"></div>
+        </div>
+      </div>
+    </section>
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="join-box">
+          <div>
+            <h2>Маєш ідею проєкту?</h2>
+            <p>
+              Ми відкриті до нових ініціатив. Якщо хочеш реалізувати свій проєкт —
+              ми допоможемо з організацією та простором.
+            </p>
+          </div>
+
+          <div class="join-actions">
+            <a class="btn btn-primary" href="contacts.html">Запропонувати</a>
+            <a class="btn btn-ghost" href="team.html">Долучитися до команди</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand small" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">ГО «Олександрійська молодь»</span>
+      </a>
+      <p>Розвиваємо молодь через проєкти та ініціативи.</p>
+    </div>
+  </footer>
+
+  <script src="drawer.js"></script>
+
+  <style>
+    .page-hero{padding:64px 0}
+    .page-hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+    .hero-side-card{background:rgba(255,255,255,.12);padding:20px;border-radius:20px;color:#fff}
+
+.projects-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:28px;
+margin-top:32px;
+}
+
+.project-card{
+position:relative;
+overflow:hidden;
+border-radius:30px;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.12),
+rgba(255,255,255,.04)
+);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(16px);
+color:#fff;
+transition:.3s ease;
+}
+
+.project-card:hover{
+transform:translateY(-7px);
+box-shadow:0 26px 70px rgba(0,0,0,.16);
+}
+
+.project-photo{
+height:260px;
+overflow:hidden;
+}
+
+.project-photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition:.4s ease;
+}
+
+.project-card:hover .project-photo img{
+transform:scale(1.05);
+}
+
+.project-body{
+padding:26px;
+}
+
+.project-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+margin-bottom:16px;
+}
+
+.project-status{
+display:inline-flex;
+padding:8px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.04em;
+}
+
+.project-status.active{
+background:rgba(80,220,140,.18);
+color:#b9ffd4;
+border:1px solid rgba(80,220,140,.25);
+}
+
+.project-status.completed{
+background:rgba(214,204,93,.18);
+color:#fff3a3;
+border:1px solid rgba(214,204,93,.25);
+}
+
+.project-status.paused{
+background:rgba(255,150,90,.18);
+color:#ffd4b8;
+border:1px solid rgba(255,150,90,.25);
+}
+
+.project-date{
+font-size:14px;
+opacity:.75;
+}
+
+.project-body h3{
+font-size:32px;
+line-height:1.15;
+margin:0 0 14px;
+}
+
+.project-short{
+font-size:17px;
+line-height:1.65;
+opacity:.86;
+margin:0 0 18px;
+}
+
+.project-period{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin:18px 0;
+font-size:14px;
+opacity:.86;
+}
+
+.project-period span{
+padding:8px 12px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.10);
+}
+
+.project-details{
+margin-top:18px;
+border-radius:18px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.10);
+overflow:hidden;
+}
+
+.project-details summary{
+cursor:pointer;
+padding:14px 16px;
+font-weight:800;
+list-style:none;
+}
+
+.project-details summary::-webkit-details-marker{
+display:none;
+}
+
+.project-details summary::after{
+content:" ↓";
+opacity:.7;
+}
+
+.project-details[open] summary::after{
+content:" ↑";
+}
+
+.project-details-text{
+padding:0 16px 16px;
+line-height:1.75;
+opacity:.86;
+white-space:pre-line;
+}
+
+@media(max-width:800px){
+.projects-grid{
+grid-template-columns:1fr;
+}
+
+.page-hero-inner{
+grid-template-columns:1fr;
+}
+}
+    @media(max-width:800px){
+      .projects-grid{grid-template-columns:1fr}
+      .page-hero-inner{grid-template-columns:1fr}
+    }
+  </style>
+  <script>
+function formatDate(date){
+if(!date){
+return "";
+}
+
+return new Date(date).toLocaleDateString("uk-UA");
+}
+
+function getStatusLabel(status){
+if(status === "completed"){
+return "Завершений";
+}
+
+if(status === "paused"){
+return "Пауза";
+}
+
+return "Активний";
+}
+
+async function loadProjects(){
+
+try{
+
+const response =
+await fetch(
+"http://localhost:5000/api/projects"
+);
+
+const projects =
+await response.json();
+
+const grid =
+document.getElementById(
+"projectsGrid"
+);
+
+if(!projects.length){
+
+grid.innerHTML = `
+<p style="color:white;">
+Проєктів поки немає
+</p>
+`;
+
+return;
+
+}
+
+grid.innerHTML =
+projects.map(project=>{
+
+const status =
+project.status || "active";
+
+const startDate =
+formatDate(project.start_date);
+
+const endDate =
+formatDate(project.end_date);
+
+return `
+
+<article class="project-card">
+
+<div class="project-photo">
+
+<img
+src="${
+project.cover_image_url
+? "http://localhost:5000" + project.cover_image_url
+: "team-placeholder.avif"
+}"
+alt="${project.title}"
+>
+
+</div>
+
+<div class="project-body">
+
+<div class="project-head">
+
+<span class="project-status ${status}">
+${getStatusLabel(status)}
+</span>
+
+${
+startDate
+? `
+<span class="project-date">
+${startDate}
+</span>
+`
+: ""
+}
+
+</div>
+
+<h3>
+${project.title}
+</h3>
+
+${
+project.short_description
+? `
+<p class="project-short">
+${project.short_description}
+</p>
+`
+: ""
+}
+
+${
+startDate || endDate
+? `
+<div class="project-period">
+${
+startDate
+? `<span>Початок: ${startDate}</span>`
+: ""
+}
+${
+endDate
+? `<span>Завершення: ${endDate}</span>`
+: ""
+}
+</div>
+`
+: ""
+}
+
+${
+project.full_description
+? `
+<details class="project-details">
+
+<summary>
+Детальніше
+</summary>
+
+<div class="project-details-text">
+${project.full_description}
+</div>
+
+</details>
+`
+: ""
+}
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}catch(error){
+
+console.error(
+"Помилка завантаження проєктів:",
+error
+);
+
+}
+
+}
+
+loadProjects();
+</script>
+</body>
+</html>

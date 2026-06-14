@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Адмінка — Головна</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Inter,Arial,sans-serif;
+}
+
+body{
+min-height:100vh;
+padding:44px;
+color:white;
+background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#7c3aed 100%);
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+h1{
+font-size:44px;
+margin-bottom:28px;
+}
+
+h2{
+font-size:26px;
+margin:30px 0 16px;
+}
+
+.form-card{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+padding:30px;
+backdrop-filter:blur(18px);
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+input,
+textarea{
+width:100%;
+padding:15px 16px;
+border:none;
+border-radius:15px;
+background:rgba(255,255,255,.10);
+color:white;
+outline:none;
+font-size:15px;
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:rgba(255,255,255,.55);
+}
+
+.section-box{
+margin-top:18px;
+padding:20px;
+border-radius:22px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.10);
+}
+
+button{
+margin-top:26px;
+width:100%;
+height:58px;
+border:none;
+border-radius:18px;
+font-size:17px;
+font-weight:800;
+cursor:pointer;
+color:white;
+background:linear-gradient(135deg,#60a5fa,#3b82f6);
+}
+
+.message{
+margin-top:18px;
+opacity:.85;
+}
+
+@media(max-width:800px){
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Адмінка — Головна сторінка</h1>
+
+<form
+id="homeForm"
+class="form-card"
+enctype="multipart/form-data"
+>
+
+<h2>Hero-блок</h2>
+
+<div class="form-grid">
+
+<input name="hero_pill" placeholder="Плашка: Молодіжна громадська організація">
+
+<input name="hero_title" placeholder="Головний заголовок">
+
+<textarea class="full" name="hero_description" placeholder="Опис hero"></textarea>
+
+<input name="hero_primary_text" placeholder="Текст головної кнопки">
+<input name="hero_primary_url" placeholder="Посилання головної кнопки">
+
+<input name="hero_secondary_text" placeholder="Текст другої кнопки">
+<input name="hero_secondary_url" placeholder="Посилання другої кнопки">
+
+<input name="hero_badge_1" placeholder="Міні-бейдж 1">
+<input name="hero_badge_2" placeholder="Міні-бейдж 2">
+<input name="hero_badge_3" placeholder="Міні-бейдж 3">
+
+<input class="full" type="file" name="hero_image" accept="image/*">
+
+<input name="hero_card_title" placeholder="Заголовок картки справа">
+<textarea class="full" name="hero_card_text" placeholder="Текст картки справа"></textarea>
+
+</div>
+
+
+<h2>Кількісні показники</h2>
+
+<div class="form-grid">
+
+<input name="stats_title" placeholder="Заголовок секції показників">
+<input name="stats_description" placeholder="Опис секції показників">
+
+<div class="section-box full">
+<div class="form-grid">
+<input name="stat_1_number" placeholder="Показник 1: число">
+<input name="stat_1_label" placeholder="Показник 1: текст">
+
+<input name="stat_2_number" placeholder="Показник 2: число">
+<input name="stat_2_label" placeholder="Показник 2: текст">
+
+<input name="stat_3_number" placeholder="Показник 3: число">
+<input name="stat_3_label" placeholder="Показник 3: текст">
+
+<input name="stat_4_number" placeholder="Показник 4: число">
+<input name="stat_4_label" placeholder="Показник 4: текст">
+</div>
+</div>
+
+</div>
+
+
+<h2>Місія</h2>
+
+<div class="form-grid">
+
+<input name="mission_title" placeholder="Заголовок місії">
+<textarea class="full" name="mission_text" placeholder="Текст місії"></textarea>
+
+<input name="mission_item_1" placeholder="Пункт місії 1">
+<input name="mission_item_2" placeholder="Пункт місії 2">
+<input name="mission_item_3" placeholder="Пункт місії 3">
+
+<input name="mission_callout_title" placeholder="Заголовок callout">
+<textarea class="full" name="mission_callout_text" placeholder="Текст callout"></textarea>
+
+<input name="mission_callout_link_text" placeholder="Текст посилання callout">
+<input name="mission_callout_link_url" placeholder="URL посилання callout">
+
+</div>
+
+
+<h2>Візія</h2>
+
+<div class="form-grid">
+
+<input name="vision_title" placeholder="Заголовок секції Візія">
+<input name="vision_description" placeholder="Опис секції Візія">
+
+<div class="section-box full">
+<div class="form-grid">
+
+<input name="vision_1_title" placeholder="Картка візії 1: заголовок">
+<input name="vision_1_description" placeholder="Картка візії 1: опис">
+
+<input name="vision_2_title" placeholder="Картка візії 2: заголовок">
+<input name="vision_2_description" placeholder="Картка візії 2: опис">
+
+<input name="vision_3_title" placeholder="Картка візії 3: заголовок">
+<input name="vision_3_description" placeholder="Картка візії 3: опис">
+
+</div>
+</div>
+
+</div>
+
+
+<h2>Цінності</h2>
+
+<div class="form-grid">
+
+<input name="values_title" placeholder="Заголовок секції Цінності">
+<input name="values_description" placeholder="Опис секції Цінності">
+
+<div class="section-box full">
+<div class="form-grid">
+
+<input name="value_1_title" placeholder="Цінність 1: заголовок">
+<input name="value_1_description" placeholder="Цінність 1: опис">
+
+<input name="value_2_title" placeholder="Цінність 2: заголовок">
+<input name="value_2_description" placeholder="Цінність 2: опис">
+
+<input name="value_3_title" placeholder="Цінність 3: заголовок">
+<input name="value_3_description" placeholder="Цінність 3: опис">
+
+<input name="value_4_title" placeholder="Цінність 4: заголовок">
+<input name="value_4_description" placeholder="Цінність 4: опис">
+
+</div>
+</div>
+
+</div>
+
+
+<h2>Команда</h2>
+
+<div class="form-grid">
+
+<input name="team_title" placeholder="Заголовок секції Команда">
+<input name="team_description" placeholder="Опис секції Команда">
+
+</div>
+
+
+<h2>Заклик до долучення</h2>
+
+<div class="form-grid">
+
+<input name="join_title" placeholder="Заголовок CTA">
+<textarea class="full" name="join_text" placeholder="Текст CTA"></textarea>
+
+<input name="join_primary_text" placeholder="Текст головної кнопки CTA">
+<input name="join_primary_url" placeholder="URL головної кнопки CTA">
+
+<input name="join_secondary_text" placeholder="Текст другої кнопки CTA">
+<input name="join_secondary_url" placeholder="URL другої кнопки CTA">
+
+</div>
+
+<button type="submit">Зберегти головну</button>
+
+<p id="homeMessage" class="message"></p>
+
+</form>
+
+</div>
+
+<script>
+const API =
+"http://localhost:5000/api/home";
+
+const form =
+document.getElementById("homeForm");
+
+const message =
+document.getElementById("homeMessage");
+
+async function loadHome(){
+
+try{
+
+const response =
+await fetch(API);
+
+const data =
+await response.json();
+
+const page =
+data.page || {};
+
+for(const key in page){
+
+if(form.elements[key]){
+form.elements[key].value =
+page[key] || "";
+}
+
+}
+
+(data.stats || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`stat_${i}_number`]){
+form.elements[`stat_${i}_number`].value =
+item.number_text || "";
+}
+
+if(form.elements[`stat_${i}_label`]){
+form.elements[`stat_${i}_label`].value =
+item.label || "";
+}
+});
+
+(data.vision || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`vision_${i}_title`]){
+form.elements[`vision_${i}_title`].value =
+item.title || "";
+}
+
+if(form.elements[`vision_${i}_description`]){
+form.elements[`vision_${i}_description`].value =
+item.description || "";
+}
+});
+
+(data.values || []).forEach((item,index)=>{
+const i = index + 1;
+
+if(form.elements[`value_${i}_title`]){
+form.elements[`value_${i}_title`].value =
+item.title || "";
+}
+
+if(form.elements[`value_${i}_description`]){
+form.elements[`value_${i}_description`].value =
+item.description || "";
+}
+});
+
+}catch(error){
+
+console.error(error);
+message.textContent =
+"Помилка завантаження даних";
+
+}
+
+}
+
+form.addEventListener("submit", async e=>{
+e.preventDefault();
+
+const formData =
+new FormData(form);
+
+message.textContent =
+"Збереження...";
+
+try{
+
+const response =
+await fetch(API,{
+method:"PUT",
+body:formData
+});
+
+const result =
+await response.json();
+
+if(!response.ok){
+throw new Error(result.error || "Помилка");
+}
+
+message.textContent =
+"Головну сторінку збережено";
+
+await loadHome();
+
+}catch(error){
+
+console.error(error);
+
+message.textContent =
+"Помилка: " + error.message;
+
+}
+});
+
+loadHome();
+</script>
+
+</body>
+</html>

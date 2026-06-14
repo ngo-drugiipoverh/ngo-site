@@ -1,0 +1,417 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ГО «Олександрійська молодь» — Головна</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти до контенту</a>
+
+ <header class="site-header">
+  <div class="container header-inner">
+
+    <div class="header-left">
+      <button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+        <span class="drawer-toggle-icon" aria-hidden="true">☰</span>
+        <span class="drawer-toggle-text">Меню</span>
+      </button>
+
+      <a class="brand" href="index.html" aria-label="На головну">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">ГО «Олександрійська молодь»</span>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+      <p class="pill" id="heroPill"></p>
+
+      <h1 id="heroTitle"></h1>
+
+      <p class="lead" id="heroDescription"></p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" id="heroPrimaryBtn" href="#"></a>
+        <a class="btn btn-ghost" id="heroSecondaryBtn" href="#"></a>
+      </div>
+
+      <div class="mini-badges">
+        <div class="mini-badge"><span class="dot"></span><span id="heroBadge1"></span></div>
+        <div class="mini-badge"><span class="dot"></span><span id="heroBadge2"></span></div>
+        <div class="mini-badge"><span class="dot"></span><span id="heroBadge3"></span></div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="photo-frame">
+        <img id="heroImage" src="cover.jpg" alt="Головне фото" />
+      </div>
+
+      <div class="card-body">
+        <h2 id="heroCardTitle"></h2>
+        <p id="heroCardText"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tape tape-1" aria-hidden="true">
+    <span>ПОВІР У СЕБЕ • ПОВІР У ДРУГИЙ ПОВЕРХ • ПОВІР •</span>
+    <span>ПОВІР У СЕБЕ • ПОВІР У ДРУГИЙ ПОВЕРХ • ПОВІР •</span>
+  </div>
+
+  <div class="tape tape-2" aria-hidden="true">
+    <span>ПІДТРИМКА • РОЗВИТОК • МОЛОДЬ • СПІЛЬНОТА •</span>
+    <span>ПІДТРИМКА • РОЗВИТОК • МОЛОДЬ • СПІЛЬНОТА •</span>
+  </div>
+</section>
+
+
+<section id="numbers" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="statsTitle"></h2>
+      <p id="statsDescription"></p>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+</section>
+
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="split">
+      <div>
+        <h2 id="missionTitle"></h2>
+        <p class="lead" id="missionText"></p>
+
+        <ul class="checklist" id="missionList"></ul>
+      </div>
+
+      <aside class="callout">
+        <h3 id="missionCalloutTitle"></h3>
+        <p id="missionCalloutText"></p>
+        <a class="link" id="missionCalloutLink" href="#"></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="visionTitle"></h2>
+      <p id="visionDescription"></p>
+    </div>
+
+    <div class="cards-3" id="visionGrid"></div>
+  </div>
+</section>
+
+
+<section id="values" class="section section-soft">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="valuesTitle"></h2>
+      <p id="valuesDescription"></p>
+    </div>
+
+    <div class="values-grid" id="valuesGrid"></div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head row">
+      <div>
+        <h2 id="teamTitle"></h2>
+        <p id="teamDescription"></p>
+      </div>
+
+      <a class="btn btn-ghost" href="team.html">Уся команда →</a>
+    </div>
+
+    <div class="team-carousel">
+      <button class="carousel-arrow left" type="button">
+        <span>‹</span>
+      </button>
+
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="teamTrack"></div>
+      </div>
+
+      <button class="carousel-arrow right" type="button">
+        <span>›</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="join" class="section join">
+  <div class="container join-inner">
+    <div>
+      <h2 id="joinTitle"></h2>
+      <p class="lead" id="joinText"></p>
+    </div>
+
+    <div class="join-actions">
+      <a class="btn btn-primary" id="joinPrimaryBtn" href="#"></a>
+      <a class="btn btn-ghost" id="joinSecondaryBtn" href="#"></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="brand small">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">ГО «Олександрійська молодь»</span>
+        </div>
+        <p class="muted" id="adminSecret">
+  © <span id="y">2026</span> Всі права захищено.
+</p>
+      </div>
+
+      <div class="footer-right">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+        <a href="#numbers">Показники</a>
+      </div>
+    </div>
+  </footer>
+  <!-- Overlay -->
+<div class="drawer-overlay" data-drawer-close></div>
+
+<!-- Drawer -->
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+<script src="drawer.js"></script>
+<script src="script.js"></script>
+<script>
+  
+function setText(id, value, fallback = "") {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value || fallback;
+}
+
+function setLink(id, text, url, fallbackText, fallbackUrl) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.textContent = text || fallbackText || "";
+  el.href = url || fallbackUrl || "#";
+}
+
+async function loadHomePage() {
+  try {
+    const response = await fetch("http://localhost:5000/api/home");
+    const data = await response.json();
+
+    const page = data.page || {};
+
+    setText("heroPill", page.hero_pill, "Молодіжна громадська організація");
+    setText("heroTitle", page.hero_title, "Підтримуємо молодь Олександрії через проєкти, ініціативи та спільноту.");
+    setText("heroDescription", page.hero_description, "Ми створюємо простір, де ідеї перетворюються на події.");
+
+    setLink("heroPrimaryBtn", page.hero_primary_text, page.hero_primary_url, "Дізнатись більше", "about.html");
+    setLink("heroSecondaryBtn", page.hero_secondary_text, page.hero_secondary_url, "Наші результати", "#numbers");
+
+    setText("heroBadge1", page.hero_badge_1, "Події й навчання");
+    setText("heroBadge2", page.hero_badge_2, "Волонтерство");
+    setText("heroBadge3", page.hero_badge_3, "Партнерства");
+
+    setText("heroCardTitle", page.hero_card_title, "Проєкти та ініціативи");
+    setText("heroCardText", page.hero_card_text, "Ми допоможемо з реалізацією твоєї ідеї та надамо простір.");
+
+    if (page.hero_image_url) {
+      document.getElementById("heroImage").src =
+        "http://localhost:5000" + page.hero_image_url;
+    }
+
+    setText("statsTitle", page.stats_title, "Кількісні показники");
+    setText("statsDescription", page.stats_description, "Невеликий зріз наших активностей.");
+
+    const statsGrid = document.getElementById("statsGrid");
+    statsGrid.innerHTML = (data.stats || []).map(item => `
+      <article class="stat">
+        <div class="stat-num">${item.number_text || ""}</div>
+        <div class="stat-label">${item.label || ""}</div>
+      </article>
+    `).join("");
+
+    setText("missionTitle", page.mission_title, "Місія");
+    setText("missionText", page.mission_text, "Посилювати молодь Олександрії через освіту, взаємопідтримку та можливості.");
+
+    const missionItems = [
+      page.mission_item_1,
+      page.mission_item_2,
+      page.mission_item_3
+    ].filter(Boolean);
+
+    document.getElementById("missionList").innerHTML =
+      missionItems.map(item => `<li>${item}</li>`).join("");
+
+    setText("missionCalloutTitle", page.mission_callout_title, "Фокус");
+    setText("missionCalloutText", page.mission_callout_text, "Проєкти, навчання, ком’юніті та партнерства.");
+    setLink("missionCalloutLink", page.mission_callout_link_text, page.mission_callout_link_url, "Детальніше →", "about.html");
+
+    setText("visionTitle", page.vision_title, "Візія");
+    setText("visionDescription", page.vision_description, "Місто, де молодь впливає на зміни та має ресурси для розвитку.");
+
+    document.getElementById("visionGrid").innerHTML =
+      (data.vision || []).map(item => `
+        <article class="info-card">
+          <h3>${item.title || ""}</h3>
+          <p>${item.description || ""}</p>
+        </article>
+      `).join("");
+
+    setText("valuesTitle", page.values_title, "Цінності");
+    setText("valuesDescription", page.values_description, "Те, як ми працюємо та взаємодіємо.");
+
+    document.getElementById("valuesGrid").innerHTML =
+      (data.values || []).map(item => `
+        <article class="value">
+          <h3>${item.title || ""}</h3>
+          <p>${item.description || ""}</p>
+        </article>
+      `).join("");
+
+    setText("teamTitle", page.team_title, "Команда");
+    setText("teamDescription", page.team_description, "Люди, які рухають ініціативи.");
+
+    document.getElementById("teamTrack").innerHTML =
+      (data.team || []).map(member => `
+        <article class="person">
+          <img
+            src="${member.photo_url ? "http://localhost:5000" + member.photo_url : "team-placeholder.avif"}"
+            alt="${member.first_name || ""} ${member.last_name || ""}"
+          />
+
+          <div class="person-meta">
+            <div class="person-name">
+              ${member.first_name || ""} ${member.last_name || ""}
+            </div>
+
+            <div class="person-role">
+              ${member.role_title || ""}
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+    setText("joinTitle", page.join_title, "Хочеш долучитися?");
+    setText("joinText", page.join_text, "Приходь у команду або запропонуй власну ініціативу.");
+
+    setLink("joinPrimaryBtn", page.join_primary_text, page.join_primary_url, "Перейти на сторінку “Команда”", "team.html");
+    setLink("joinSecondaryBtn", page.join_secondary_text, page.join_secondary_url, "Більше про нас", "about.html");
+
+  } catch (error) {
+    console.error("Помилка завантаження головної:", error);
+  }
+}
+
+loadHomePage();
+
+let clickCount = 0;
+let clickTimer;
+
+const adminSecret =
+document.getElementById("adminSecret");
+
+if (adminSecret) {
+  adminSecret.addEventListener("click", () => {
+    clickCount++;
+
+    clearTimeout(clickTimer);
+
+    clickTimer = setTimeout(() => {
+      clickCount = 0;
+    }, 2000);
+
+    if (clickCount >= 5) {
+      window.location.href = "admin-login.html";
+    }
+  });
+}
+
+</script>
+</body>
+</html>

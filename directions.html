@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ГО «Олександрійська молодь» — Напрями роботи</title>
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+.directions-hero{position:relative;padding:100px 0 60px;overflow:hidden}
+.directions-hero::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:rgba(214,204,93,.12);filter:blur(110px);right:8%;top:10%}
+.directions-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;position:relative;z-index:2}
+.directions-hero-card{padding:30px;border-radius:30px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);color:white;backdrop-filter:blur(16px)}
+.directions-hero-card h3{font-size:32px;margin:0 0 14px}
+.directions-hero-card p{line-height:1.7;opacity:.84}
+.directions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:28px;margin-top:34px}
+.direction-card-main{overflow:hidden;border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);color:white;backdrop-filter:blur(16px);transition:.3s ease}
+.direction-card-main:hover{transform:translateY(-7px);box-shadow:0 26px 70px rgba(0,0,0,.16)}
+.direction-photo{height:230px;overflow:hidden;background:rgba(255,255,255,.06)}
+.direction-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s ease}
+.direction-card-main:hover img{transform:scale(1.05)}
+.direction-body{padding:24px}
+.direction-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.direction-badge{padding:7px 11px;border-radius:999px;background:rgba(214,204,93,.16);border:1px solid rgba(214,204,93,.22);color:#fff4a7;font-size:13px;font-weight:800}
+.direction-body h3{font-size:30px;line-height:1.15;margin:0 0 14px}
+.direction-short{font-size:16px;line-height:1.65;opacity:.84;margin:0 0 16px}
+.direction-details{margin-top:18px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);overflow:hidden}
+.direction-details summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}
+.direction-details summary::-webkit-details-marker{display:none}
+.direction-details-text{padding:0 16px 16px;line-height:1.75;white-space:pre-line;opacity:.86}
+.direction-link{display:inline-flex;margin-top:18px;padding:12px 18px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);color:white;text-decoration:none;font-weight:800}
+.direction-link:hover{background:rgba(255,255,255,.17)}
+.directions-empty{color:white;opacity:.8}
+@media(max-width:900px){.directions-hero-grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Перейти до контенту</a>
+
+<header class="site-header">
+<div class="container header-inner">
+
+<div class="header-left">
+<button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+<span class="drawer-toggle-icon">☰</span>
+<span class="drawer-toggle-text">Меню</span>
+</button>
+
+<a class="brand" href="index.html">
+<span class="brand-mark"></span>
+<span class="brand-text">ГО «Олександрійська молодь»</span>
+</a>
+</div>
+
+<nav class="nav">
+<a href="about.html">Про нас</a>
+<a href="team.html">Команда</a>
+<a href="projects.html">Проєкти</a>
+<a href="partners.html">Партнери</a>
+<a class="nav-cta" href="contacts.html">Контакти</a>
+</nav>
+
+</div>
+</header>
+
+<div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+        </details>
+        
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+
+<main id="main">
+
+<section class="directions-hero">
+<div class="container directions-hero-grid">
+
+<div>
+<p class="pill" id="heroPill"></p>
+<h1 id="heroTitle"></h1>
+<p class="lead" id="heroDescription"></p>
+
+<div class="hero-actions">
+<a class="btn btn-primary" id="heroPrimary" href="#"></a>
+<a class="btn btn-ghost" id="heroSecondary" href="#"></a>
+</div>
+</div>
+
+<aside class="directions-hero-card">
+<h3>Наші напрями</h3>
+<p>
+Тут зібрані основні формати роботи організації: проєкти, простори, події, партнерства та підтримка молодіжних ініціатив.
+</p>
+</aside>
+
+</div>
+</section>
+
+<section class="section section-soft" id="directions">
+<div class="container">
+
+<div class="section-head">
+<h2 id="sectionTitle"></h2>
+<p id="sectionDescription"></p>
+</div>
+
+<div id="directionsGrid" class="directions-grid"></div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="join-box">
+
+<div>
+<h2 id="ctaTitle"></h2>
+<p id="ctaText"></p>
+</div>
+
+<div class="join-actions">
+<a class="btn btn-primary" id="ctaButton" href="#"></a>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="container footer-inner">
+<a class="brand small" href="index.html">
+<span class="brand-mark"></span>
+<span class="brand-text">ГО «Олександрійська молодь»</span>
+</a>
+<p>Напрями роботи організації.</p>
+</div>
+</footer>
+
+<script src="drawer.js"></script>
+
+<script>
+function setText(id,value,fallback=""){
+const el = document.getElementById(id);
+if(el){
+el.textContent = value || fallback;
+}
+}
+
+function setLink(id,text,url,fallbackText,fallbackUrl){
+const el = document.getElementById(id);
+if(!el) return;
+
+el.textContent = text || fallbackText || "";
+el.href = url || fallbackUrl || "#";
+}
+
+async function loadDirections(){
+try{
+
+const response = await fetch("http://localhost:5000/api/directions");
+const data = await response.json();
+
+const page = data.page || {};
+
+setText("heroPill", page.hero_pill, "Напрями роботи");
+setText("heroTitle", page.hero_title, "Напрями роботи");
+setText("heroDescription", page.hero_description, "Основні формати діяльності нашої організації.");
+
+setLink("heroPrimary", page.hero_primary_text, page.hero_primary_url, "Переглянути напрями", "#directions");
+setLink("heroSecondary", page.hero_secondary_text, page.hero_secondary_url, "Зв’язатися", "contacts.html");
+
+setText("sectionTitle", page.section_title, "Основні напрями");
+setText("sectionDescription", page.section_description, "Дізнайся, чим займається наша команда.");
+
+setText("ctaTitle", page.cta_title, "Хочеш долучитися?");
+setText("ctaText", page.cta_text, "Обери напрям, який тобі цікавий, або напиши нам свою ідею.");
+setLink("ctaButton", page.cta_button_text, page.cta_button_url, "Долучитися", "contacts.html");
+
+const grid = document.getElementById("directionsGrid");
+const items = data.directions || [];
+
+if(!items.length){
+grid.innerHTML = `<p class="directions-empty">Напрями поки не додані.</p>`;
+return;
+}
+
+grid.innerHTML = items.map(item => `
+<article class="direction-card-main">
+
+<div class="direction-photo">
+<img
+src="${item.cover_image_url ? "http://localhost:5000" + item.cover_image_url : "team-placeholder.avif"}"
+alt="${item.title}"
+>
+</div>
+
+<div class="direction-body">
+
+<div class="direction-meta">
+${item.category ? `<span class="direction-badge">${item.category}</span>` : ""}
+${item.icon ? `<span class="direction-badge">${item.icon}</span>` : ""}
+</div>
+
+<h3>${item.title}</h3>
+
+${item.short_description ? `<p class="direction-short">${item.short_description}</p>` : ""}
+
+${
+item.full_description
+? `
+<details class="direction-details">
+<summary>Детальніше</summary>
+<div class="direction-details-text">${item.full_description}</div>
+</details>
+`
+: ""
+}
+
+${
+item.link_url
+? `
+<a class="direction-link" href="${item.link_url}">
+${item.link_text || "Перейти →"}
+</a>
+`
+: ""
+}
+
+</div>
+</article>
+`).join("");
+
+}catch(error){
+console.error("Помилка завантаження напрямів:", error);
+}
+}
+
+loadDirections();
+</script>
+
+</body>
+</html>

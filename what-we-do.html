@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ГО «Олександрійська молодь» — Що ми робимо?</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cases-page{
+      color: var(--paper);
+    }
+
+    .page-hero{
+      position: relative;
+      padding: 56px 0 34px;
+      overflow: hidden;
+    }
+
+    .page-hero-inner{
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .hero-side-card{
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      color: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-side-card h3{ margin: 0 0 8px; }
+    .hero-side-card p{ margin: 0 0 14px; color: rgba(255,255,255,.86); }
+
+    .chips{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip{
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(24,20,17,.18);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .cases-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .case-card{
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .case-photo img{
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: rgba(255,255,255,.12);
+    }
+
+    .case-body{
+      padding: 18px;
+    }
+
+    .case-top{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .case-top h3{
+      margin: 0;
+      font-size: 20px;
+      color: var(--paper);
+    }
+
+    .case-year{
+      flex-shrink: 0;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(214,204,93,.18);
+      border: 1px solid rgba(214,204,93,.45);
+      color: var(--paper);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .case-text{
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.86);
+    }
+
+    .case-list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.88);
+    }
+
+    .case-list li + li{
+      margin-top: 8px;
+    }
+
+    .cases-note{
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.9);
+    }
+
+    @media (max-width: 980px){
+      .page-hero-inner,
+      .cases-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти до контенту</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+          <span class="drawer-toggle-icon" aria-hidden="true">☰</span>
+          <span class="drawer-toggle-text">Меню</span>
+        </button>
+
+        <a class="brand" href="index.html" aria-label="На головну">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">ГО «Олександрійська молодь»</span>
+        </a>
+      </div>
+
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+        <a href="what-we-do.html">Що ми робимо?</a>
+        <a href="projects.html">Проєкти</a>
+        <a class="nav-cta" href="contacts.html">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="cases-page">
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <div>
+          <p class="pill">Сторінка 2.2</p>
+          <h1>Що ми робимо?</h1>
+          <p class="lead">
+            Ми підтримуємо молодіжні ініціативи, створюємо події, розвиваємо корисні формати
+            для спільноти та допомагаємо ідеям ставати реальними кейсами.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cases">Дивитися кейси</a>
+            <a class="btn btn-ghost" href="team.html">Наша команда</a>
+          </div>
+        </div>
+
+        <aside class="hero-side-card">
+          <h3>У фокусі</h3>
+          <p>
+            Освітні події, творчі формати, розвиток молодіжного простору,
+            партнерства та підтримка локальних ініціатив.
+          </p>
+          <div class="chips">
+            <span class="chip">Події</span>
+            <span class="chip">Навчання</span>
+            <span class="chip">Ком’юніті</span>
+            <span class="chip">Ініціативи</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="tape tape-1" aria-hidden="true">
+        <span>ІДЕЇ • ПОДІЇ • РЕЗУЛЬТАТИ • СПІЛЬНОТА •</span>
+      </div>
+    </section>
+
+    <section id="cases" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Найкращі кейси</h2>
+          <p>Приклади того, як ідеї молоді перетворюються на реальні формати та корисні результати.</p>
+        </div>
+
+        <div class="cases-grid" role="list" aria-label="Найкращі кейси організації">
+          <article class="case-card" role="listitem">
+            <div class="case-photo">
+              <img src="case-1.jpg" alt="Учасники освітнього тренінгу в молодіжному просторі" />
+            </div>
+            <div class="case-body">
+              <div class="case-top">
+                <h3>Освітній інтенсив</h3>
+                <span class="case-year">2025</span>
+              </div>
+              <p class="case-text">
+                Серія практичних зустрічей для молоді з розвитку навичок комунікації, командної роботи та самопрезентації.
+              </p>
+              <ul class="case-list">
+                <li>Кілька тематичних сесій з експертами та менторами.</li>
+                <li>Нові учасники команди та активні молодіжні ініціативи.</li>
+                <li>Формат, який можна повторювати щосезону.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="case-card" role="listitem">
+            <div class="case-photo">
+              <img src="case-2.jpg" alt="Творча подія з молоддю та спільною роботою над ідеями" />
+            </div>
+            <div class="case-body">
+              <div class="case-top">
+                <h3>Творчий простір для молоді</h3>
+                <span class="case-year">2025</span>
+              </div>
+              <p class="case-text">
+                Подія, що об’єднала молодих людей навколо творчості, взаємопідтримки та спільного створення контенту.
+              </p>
+              <ul class="case-list">
+                <li>Майстер-класи, знайомства та презентація локальних талантів.</li>
+                <li>Безпечне середовище для нових людей і нових ідей.</li>
+                <li>Поштовх до подальших спільних активностей.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="case-card" role="listitem">
+            <div class="case-photo">
+              <img src="case-3.jpg" alt="Командна робота над молодіжним проєктом та подією" />
+            </div>
+            <div class="case-body">
+              <div class="case-top">
+                <h3>Локальна ініціатива</h3>
+                <span class="case-year">2026</span>
+              </div>
+              <p class="case-text">
+                Підтримка ідеї від молоді — від першого обговорення до реалізації події у просторі організації.
+              </p>
+              <ul class="case-list">
+                <li>Допомога з організацією, комунікацією та промо.</li>
+                <li>Залучення партнерів і активних учасників громади.</li>
+                <li>Реальний приклад того, як молодь може впливати на місто.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="cases-note">
+          Тут можна буде замінити ці приклади на ваші реальні кейси: назву події, короткий опис,
+          фото, рік та результати. Структура вже готова — залишиться тільки підставити ваш контент.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="brand small">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">ГО «Олександрійська молодь»</span>
+        </div>
+        <p class="muted">© <span id="y">2026</span> Всі права захищено.</p>
+      </div>
+
+      <div class="footer-right">
+        <a href="index.html">Головна</a>
+        <a href="team.html">Команда</a>
+        <a href="#cases">Кейси</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="drawer-overlay" data-drawer-close></div>
+
+  <aside class="drawer" id="siteDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="drawer-title">ГО «Олександрійська молодь»</span>
+      </div>
+
+      <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Меню сайту">
+      <a class="drawer-link" href="index.html">Головна</a>
+
+      <details class="drawer-group" open>
+        <summary>Про нас</summary>
+        <div class="drawer-sub">
+          <a href="about.html">Про нас</a>
+          <a href="team.html">Команда</a>
+          <a href="what-we-do.html">Що ми робимо?</a>
+        </div>
+      </details>
+
+      <a class="drawer-link" href="opportunities.html">Можливості</a>
+      <a class="drawer-link" href="news.html">Новини</a>
+
+      <details class="drawer-group">
+        <summary>Бібліотека</summary>
+        <div class="drawer-sub">
+          <a href="library.html">Бібліотека</a>
+          <a href="books.html">Книги</a>
+          <a href="games.html">Ігри</a>
+        </div>
+      </details>
+
+      <details class="drawer-group">
+        <summary>Напрями роботи</summary>
+        <div class="drawer-sub">
+          <a href="directions.html">Напрями роботи</a>
+          <a href="second-floor.html">Другий поверх</a>
+          <a href="space-space.html">Space Space</a>
+        </div>
+      </details>
+
+      <a class="drawer-link" href="projects.html">Проєкти</a>
+      <a class="drawer-link" href="partners.html">Партнери</a>
+      <a class="drawer-cta" href="contacts.html">Контакти</a>
+    </nav>
+
+    <div class="drawer-foot">
+      <p>Тут зібрані найкращі кейси та формати, які вже вдалося реалізувати.</p>
+    </div>
+  </aside>
+
+  <script src="drawer.js"></script>
+</body>
+</html>

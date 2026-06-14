@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ГО «Олександрійська молодь» — Другий поверх</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .space-grid,
+    .formats-grid,
+    .studio-grid{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+    .space-grid{ grid-template-columns: 1.05fr .95fr; align-items:start; }
+    .formats-grid,
+    .studio-grid{ grid-template-columns: repeat(3, 1fr); }
+
+    .glass-card,
+    .format-card,
+    .booking-card,
+    .studio-card,
+    .equipment-card{
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 26px;
+      padding: 20px;
+      color: var(--paper);
+      box-shadow: 0 18px 45px rgba(24,20,17,.12);
+    }
+    .glass-card p,
+    .format-card p,
+    .booking-card p,
+    .studio-card p,
+    .equipment-card p{ color: rgba(255,255,255,.86); margin: 0; }
+
+    .space-photo,
+    .booking-photo{
+      overflow:hidden;
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 18px 45px rgba(24,20,17,.12);
+    }
+    .space-photo img,
+    .booking-photo img{
+      width:100%;
+      height:100%;
+      min-height: 320px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .list-clean{
+      margin:14px 0 0;
+      padding-left:18px;
+      color: rgba(255,255,255,.88);
+    }
+    .list-clean li{ margin:8px 0; }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .mini-stat{
+      padding:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      text-align:center;
+    }
+    .mini-stat strong{
+      display:block;
+      color: var(--paper);
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .mini-stat span{ color: rgba(255,255,255,.84); font-size: 14px; }
+
+    .format-card h3,
+    .studio-card h3,
+    .equipment-card h3,
+    .glass-card h2,
+    .booking-card h2{ margin: 0 0 8px 0; }
+
+    .tag-row,
+    .studio-tags{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .tag,
+    .studio-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.92);
+      font-weight:700;
+      font-size: 13px;
+    }
+
+    .booking-wrap{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap:14px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+
+    .steps{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+    .step{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .step-num{
+      width:32px;
+      height:32px;
+      flex:0 0 32px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--accent-yellow), rgba(255,255,255,.6));
+    }
+    .step h3{ margin:0 0 4px 0; color: var(--paper); font-size:17px; }
+    .step p{ margin:0; color: rgba(255,255,255,.84); }
+
+    .cta-inline{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+
+    .page-hero h1{
+      color: var(--paper);
+    }
+
+    @media (max-width: 920px){
+      .space-grid,
+      .booking-wrap,
+      .formats-grid,
+      .studio-grid{
+        grid-template-columns: 1fr;
+      }
+      .mini-stats{ grid-template-columns: 1fr; }
+      .space-photo img,
+      .booking-photo img{ min-height: 240px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти до контенту</a>
+
+  <header class="site-header">
+  <div class="container header-inner">
+
+    <div class="header-left">
+      <button class="drawer-toggle" type="button" aria-controls="siteDrawer" aria-expanded="false">
+        <span class="drawer-toggle-icon" aria-hidden="true">☰</span>
+        <span class="drawer-toggle-text">Меню</span>
+      </button>
+
+      <a class="brand" href="index.html" aria-label="На головну">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">ГО «Олександрійська молодь»</span>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="about.html">Про нас</a>
+      <a href="team.html">Команда</a>
+      <a href="news.html">Новини</a>
+      <a href="projects.html">Проєкти</a>
+      <a class="nav-cta" href="#join">Долучитися</a>
+    </nav>
+
+  </div>
+</header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <div>
+          <h1>Другий поверх</h1>
+          <p class="lead">
+            Простір для роботи, зустрічей, подій і створення контенту. Тут можна зосередитися,
+            зібрати команду, провести захід або записати власний проєкт.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#booking">Забронювати простір</a>
+            <a class="btn btn-ghost" href="#studio">Студія «КОНТЕНТА»</a>
+          </div>
+        </div>
+
+        <aside class="hero-side-card">
+          <h3>Що тут є</h3>
+          <p>Коворкінг • відкриті формати • бронювання подій • аудіовізуальна студія</p>
+          <div class="chips">
+            <span class="chip">Гнучкий простір</span>
+            <span class="chip">Для команд і молоді</span>
+            <span class="chip">Події та контент</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="tape tape-1" aria-hidden="true">
+        <span>СПІЛЬНОТА • РОБОТА • ПОДІЇ • ІДЕЇ •</span>
+        <span>СПІЛЬНОТА • РОБОТА • ПОДІЇ • ІДЕЇ •</span>
+        <span>СПІЛЬНОТА • РОБОТА • ПОДІЇ • ІДЕЇ •</span>
+        <span>СПІЛЬНОТА • РОБОТА • ПОДІЇ • ІДЕЇ •</span>
+      </div>
+      <div class="tape tape-2" aria-hidden="true">
+        <span>ЛЮДИ • РОБОТА • АКТИВНОСТІ • ІДЕЇ •</span>
+        <span>ЛЮДИ • РОБОТА • АКТИВНОСТІ • ІДЕЇ •</span>
+        <span>ЛЮДИ • РОБОТА • АКТИВНОСТІ • ІДЕЇ •</span>
+        <span>ЛЮДИ • РОБОТА • АКТИВНОСТІ • ІДЕЇ •</span>
+      </div>
+    </section>
+
+    <section class="section" id="coworking">
+      <div class="container">
+        <div class="section-head">
+          <h2>Про зону коворкінгу</h2>
+          <p>Відкрите середовище для навчання, роботи над ідеями та проведення невеликих зустрічей.</p>
+        </div>
+
+        <div class="space-grid">
+          <article class="glass-card">
+            <h2>Місце, де можна зібратись і працювати</h2>
+            <p>
+              «Другий поверх» — це гнучкий молодіжний простір, у якому можна попрацювати за ноутбуком,
+              провести міні-зустріч, підготувати презентацію, обговорити ідею з командою або просто
+              побути в середовищі активних людей.
+            </p>
+
+
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <strong>2+</strong>
+                <span>формати використання</span>
+              </div>
+              <div class="mini-stat">
+                <strong>1</strong>
+                <span>простір для подій</span>
+              </div>
+              <div class="mini-stat">
+                <strong>∞</strong>
+                <span>ідей для реалізації</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="space-photo">
+            <img src="second-floor-cover.jpg" alt="Простір Другий поверх для роботи та зустрічей" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="formats">
+      <div class="container">
+        <div class="section-head">
+          <h2>Щотижневі формати</h2>
+          <p>Приклади активностей, які можна проводити регулярно у просторі.</p>
+        </div>
+
+        <div class="formats-grid" role="list">
+          <article class="format-card" role="listitem">
+            <h3>Коворкінг-дні</h3>
+            <p>
+              Відкриті години для тих, хто хоче попрацювати, підготувати завдання, обговорити ідеї або
+              просто змінити обстановку на більш мотивуючу.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Навчання</span>
+              <span class="tag">Робота</span>
+            </div>
+          </article>
+
+          <article class="format-card" role="listitem">
+            <h3>Клуби та зустрічі</h3>
+            <p>
+              Тематичні вечори, книжкові клуби, ігрові формати, перегляди, обговорення та неформальні
+              ком’юніті-зустрічі для молоді.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Ком’юніті</span>
+              <span class="tag">Нетворкінг</span>
+            </div>
+          </article>
+
+          <article class="format-card" role="listitem">
+            <h3>Майстер-класи</h3>
+            <p>
+              Практичні формати зі спікерами, тренерами або учасниками команди: від комунікацій до
+              творчих і цифрових навичок.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Практика</span>
+              <span class="tag">Розвиток</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
+      <div class="container">
+        <div class="section-head">
+          <h2>Забронювати простір на подію</h2>
+          <p>Простір можна використати для власної ініціативи, зустрічі, міні-заходу або запису контенту.</p>
+        </div>
+
+        <div class="booking-wrap">
+          <div class="booking-photo">
+            <img src="second-floor-booking.jpg" alt="Підготовка простору до події" />
+          </div>
+
+          <article class="booking-card">
+            <h2>Як це працює</h2>
+            <p>
+              Якщо в тебе є ідея заходу або тобі потрібен простір для команди, можна подати заявку на
+              бронювання. Після цього ми зв’яжемося, уточнимо формат події та допоможемо підібрати найкращий час.
+            </p>
+
+            <div class="steps">
+              <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                  <h3>Опиши ідею</h3>
+                  <p>Коротко розкажи, що це за формат, для кого він і скільки людей планується.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                  <h3>Обери дату</h3>
+                  <p>Запропонуй бажаний день і час — ми перевіримо доступність простору.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                  <h3>Отримай підтвердження</h3>
+                  <p>Після узгодження ти отримаєш відповідь з деталями проведення події.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-inline">
+              <a class="btn btn-primary" href="contacts.html">Подати заявку</a>
+              <a class="btn btn-ghost" href="projects.html">Подивитися проєкти</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="studio">
+      <div class="container">
+        <div class="section-head">
+          <h2>Аудіовізуальна студія «КОНТЕНТА»</h2>
+          <p>Місце для створення фото, відео, подкастів, інтерв’ю та іншого контенту.</p>
+        </div>
+
+        <div class="studio-grid" role="list">
+          <article class="studio-card" role="listitem">
+            <h3>Для творців контенту</h3>
+            <p>
+              Студія підходить для запису коротких відео, подкастів, інтерв’ю, фото для соцмереж і
+              презентаційних матеріалів молодіжних ініціатив.
+            </p>
+            <div class="studio-tags">
+              <span class="studio-tag">Фото</span>
+              <span class="studio-tag">Відео</span>
+              <span class="studio-tag">Подкасти</span>
+            </div>
+          </article>
+
+          <article class="equipment-card" role="listitem">
+            <h3>Що можна робити</h3>
+            <p>
+              Записувати розмовні формати, створювати контент для проєктів, готувати матеріали для
+              анонсів, соцмереж і публікацій.
+            </p>
+            <div class="studio-tags">
+              <span class="studio-tag">Анонси</span>
+              <span class="studio-tag">Reels</span>
+              <span class="studio-tag">Інтерв’ю</span>
+            </div>
+          </article>
+
+          <article class="equipment-card" role="listitem">
+            <h3>Як скористатися</h3>
+            <p>
+              Щоб скористатися студією, подай заявку або напиши команді. Ми допоможемо зрозуміти, чи
+              підходить простір під твій формат і як краще організувати запис.
+            </p>
+            <div class="cta-inline">
+              <a class="btn btn-primary" href="contacts.html">Написати нам</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="brand small">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">ГО «Олександрійська молодь»</span>
+        </div>
+        <p class="muted">© <span id="y">2026</span> Всі права захищено.</p>
+      </div>
+
+      <div class="footer-right">
+        <a href="index.html">Головна</a>
+        <a href="directions.html">Напрями роботи</a>
+        <a href="contacts.html">Контакти</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="drawer-overlay" data-drawer-close></div>
+
+<aside class="drawer" id="siteDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="drawer-title">ГО «Олександрійська молодь»</span>
+    </div>
+
+    <button class="drawer-close" type="button" aria-label="Закрити меню" data-drawer-close>✕</button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Меню сайту">
+    <a class="drawer-link" href="index.html">Головна</a>
+
+    <details class="drawer-group">
+      <summary>Про нас</summary>
+      <div class="drawer-sub">
+        <a href="about.html">Про нас</a>
+        <a href="team.html">Команда</a>
+      </div>
+    </details>
+
+    <a class="drawer-link" href="opportunities.html">Можливості</a>
+    <a class="drawer-link" href="news.html">Новини</a>
+
+    <details class="drawer-group">
+      <summary>Бібліотека</summary>
+      <div class="drawer-sub">
+        <a href="books.html">Книги</a>
+        <a href="games.html">Ігри</a>
+      </div>
+    </details>
+
+    <details class="drawer-group">
+      <summary>Напрями роботи</summary>
+      <div class="drawer-sub">
+        <a href="directions.html">Напрями роботи</a>
+        <a href="second-floor.html">Другий поверх</a>
+      </div>
+    </details>
+
+
+    <a class="drawer-link" href="projects.html">Проєкти</a>
+    <a class="drawer-link" href="partners.html">Партнери</a>
+
+    <a class="drawer-cta" href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="drawer-foot">
+    <p>Пиши нам — і долучайся до команди або ініціатив.</p>
+  </div>
+</aside>
+
+<script src="drawer.js"></script>
+
+<script>
+async function loadSecondFloor() {
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/spaces/second-floor"
+    );
+
+    const space = await response.json();
+
+    if (space.name) {
+      document.querySelector(".page-hero h1").textContent =
+        space.name;
+    }
+
+    if (space.description) {
+      document.querySelector(".page-hero .lead").textContent =
+        space.description;
+    }
+
+    if (space.short_description) {
+      const block =
+        document.querySelector(
+          "#coworking .glass-card p"
+        );
+
+      if (block) {
+        block.textContent =
+          space.short_description;
+      }
+    }
+
+    if (space.studio_description) {
+      const studio =
+        document.querySelector(
+          "#studio .studio-card p"
+        );
+
+      if (studio) {
+        studio.textContent =
+          space.studio_description;
+      }
+    }
+
+    if (space.cover_image_url) {
+      const img =
+        document.querySelector(
+          ".space-photo img"
+        );
+
+      if (img) {
+        img.src =
+          "http://localhost:5000" +
+          space.cover_image_url;
+      }
+    }
+
+    if (space.booking_image_url) {
+      const img =
+        document.querySelector(
+          ".booking-photo img"
+        );
+
+      if (img) {
+        img.src =
+          "http://localhost:5000" +
+          space.booking_image_url;
+      }
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+loadSecondFloor();
+</script>
+</body>
+</html>

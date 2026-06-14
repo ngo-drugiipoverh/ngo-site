@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Адмінка — Команда</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<main class="section">
+<div class="container">
+
+<div class="section-head">
+<h1>Адмінка — Команда</h1>
+<p>Тут можна додавати, редагувати та видаляти учасників.</p>
+</div>
+
+<div style="display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap;">
+<a class="btn btn-ghost" href="admin-dashboard.html">← До дашборду</a>
+<button class="btn btn-ghost" id="logoutBtn" type="button">Вийти</button>
+</div>
+
+<form id="teamForm" class="apply-form" enctype="multipart/form-data" style="margin-bottom:40px;">
+<input type="hidden" name="id" />
+<input type="hidden" name="photo_position_x" value="50" />
+<input type="hidden" name="photo_position_y" value="50" />
+
+<div class="form-grid">
+
+<label class="field">
+<span>Ім’я</span>
+<input type="text" name="first_name" required />
+</label>
+
+<label class="field">
+<span>Прізвище</span>
+<input type="text" name="last_name" required />
+</label>
+
+<label class="field">
+<span>Роль</span>
+<input type="text" name="role_title" required />
+</label>
+
+<label class="field">
+<span>Instagram</span>
+<input type="text" name="instagram_url" />
+</label>
+
+<label class="field">
+<span>Telegram</span>
+<input type="text" name="telegram_url" />
+</label>
+
+<label class="field">
+<span>Порядок</span>
+<input type="number" name="sort_order" value="0" />
+</label>
+
+<label class="field field-full">
+<span>Біо</span>
+<textarea name="bio" rows="4"></textarea>
+</label>
+
+<label class="field field-full">
+<span>Фото</span>
+<input type="file" name="photo" accept="image/*" id="photoInput" />
+
+<div class="photo-crop-preview" id="photoPreview">
+<img id="photoPreviewImg" src="" alt="">
+</div>
+
+<p class="form-hint">
+Перетягни фото мишкою, щоб красиво виставити обличчя.
+</p>
+</label>
+
+</div>
+
+<div class="form-actions">
+<button class="btn btn-primary" type="submit">Зберегти</button>
+<button class="btn btn-ghost" type="button" id="resetBtn">Очистити</button>
+<p id="teamMessage" class="form-hint"></p>
+</div>
+
+</form>
+
+<div class="section-head">
+<h2>Список учасників</h2>
+</div>
+
+<div id="teamList" class="team-grid"></div>
+
+</div>
+</main>
+
+<script>
+if (localStorage.getItem("isAdmin") !== "true") {
+  window.location.href = "admin-login.html";
+}
+
+const API =
+"http://localhost:5000/api/team";
+
+const form =
+document.getElementById("teamForm");
+
+const message =
+document.getElementById("teamMessage");
+
+const teamList =
+document.getElementById("teamList");
+
+async function loadTeam(){
+
+try{
+
+const response =
+await fetch(API);
+
+const members =
+await response.json();
+
+if(!response.ok){
+throw new Error(
+members.error || "Не вдалося завантажити команду"
+);
+}
+
+if(!members.length){
+teamList.innerHTML =
+"<p style='color:white;'>Учасників поки немає.</p>";
+return;
+}
+
+teamList.innerHTML =
+members.map(member => `
+
+<article class="member-card">
+
+<div class="member-photo">
+<img
+src="${member.photo_url ? "http://localhost:5000" + member.photo_url : "team-placeholder.avif"}"
+alt="${member.first_name || ""} ${member.last_name || ""}"
+>
+</div>
+
+<div class="member-body">
+
+<div class="member-name">
+${member.first_name || ""} ${member.last_name || ""}
+</div>
+
+<div class="member-role">
+${member.role_title || ""}
+</div>
+
+<p class="member-text">
+${member.bio || ""}
+</p>
+
+<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+
+<button
+class="btn btn-ghost"
+type="button"
+onclick='editMember(${JSON.stringify(member).replace(/'/g, "&apos;")})'
+>
+Редагувати
+</button>
+
+<button
+class="btn btn-ghost"
+type="button"
+onclick="deleteMember('${member.id}')"
+>
+Видалити
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+`).join("");
+
+}catch(error){
+
+console.error(error);
+
+teamList.innerHTML =
+`<p style="color:white;">Помилка: ${error.message}</p>`;
+
+}
+
+}
+
+function editMember(member){
+
+form.photo_position_x.value =
+member.photo_position_x || 50;
+
+form.photo_position_y.value =
+member.photo_position_y || 50;
+
+form.elements["id"].value =
+member.id || "";
+
+form.first_name.value =
+member.first_name || "";
+
+form.last_name.value =
+member.last_name || "";
+
+form.role_title.value =
+member.role_title || "";
+
+form.bio.value =
+member.bio || "";
+
+form.instagram_url.value =
+member.instagram_url || "";
+
+form.telegram_url.value =
+member.telegram_url || "";
+
+form.sort_order.value =
+member.sort_order || 0;
+
+photoX = member.photo_position_x || 50;
+photoY = member.photo_position_y || 50;
+
+form.photo_position_x.value = photoX;
+form.photo_position_y.value = photoY;
+
+if (member.photo_url) {
+  photoPreviewImg.src = "http://localhost:5000" + member.photo_url;
+  photoPreviewImg.style.display = "block";
+  updatePhotoPosition();
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+async function deleteMember(id){
+
+if(!confirm("Точно видалити учасника?")){
+return;
+}
+
+try{
+
+const response =
+await fetch(
+API + "/" + id,
+{
+method:"DELETE"
+}
+);
+
+const data =
+await response.json();
+
+if(!response.ok){
+throw new Error(data.error || "Помилка видалення");
+}
+
+await loadTeam();
+
+}catch(error){
+
+alert("Помилка: " + error.message);
+
+}
+
+}
+
+form.addEventListener("submit", async e => {
+
+e.preventDefault();
+
+message.textContent =
+"Збереження...";
+
+const id =
+form.elements["id"].value;
+
+try{
+
+let response;
+
+if(id){
+
+const formData =
+new FormData(form);
+
+response =
+await fetch(
+API + "/" + id,
+{
+method:"PUT",
+body:formData
+}
+);
+
+}else{
+
+const formData =
+new FormData(form);
+
+response =
+await fetch(
+API,
+{
+method:"POST",
+body:formData
+}
+);
+
+}
+
+const data =
+await response.json();
+
+if(!response.ok){
+throw new Error(data.error || "Помилка");
+}
+
+message.textContent =
+"Збережено успішно";
+
+form.reset();
+form.elements["id"].value = "";
+
+await loadTeam();
+
+}catch(error){
+
+message.textContent =
+"Помилка: " + error.message;
+
+}
+
+});
+
+document
+.getElementById("resetBtn")
+.addEventListener("click", () => {
+form.reset();
+form.elements["id"].value = "";
+form.photo_position_x.value = 50;
+form.photo_position_y.value = 50;
+message.textContent = "";
+photoPreviewImg.src = "";
+photoPreviewImg.style.display = "none";
+photoX = 50;
+photoY = 50;
+form.photo_position_x.value = 50;
+form.photo_position_y.value = 50;
+});
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", () => {
+localStorage.removeItem("isAdmin");
+localStorage.removeItem("adminEmail");
+window.location.href = "admin-login.html";
+});
+
+loadTeam();
+
+const photoInput = document.getElementById("photoInput");
+const photoPreview = document.getElementById("photoPreview");
+const photoPreviewImg = document.getElementById("photoPreviewImg");
+
+let photoX = 50;
+let photoY = 50;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+
+function updatePhotoPosition() {
+  photoX = Math.max(0, Math.min(100, photoX));
+  photoY = Math.max(0, Math.min(100, photoY));
+
+  form.photo_position_x.value = Math.round(photoX);
+  form.photo_position_y.value = Math.round(photoY);
+
+  photoPreviewImg.style.objectPosition = `${photoX}% ${photoY}%`;
+}
+
+photoInput.addEventListener("change", () => {
+  const file = photoInput.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = e => {
+    photoPreviewImg.src = e.target.result;
+    photoPreviewImg.style.display = "block";
+
+    photoX = 50;
+    photoY = 50;
+    updatePhotoPosition();
+  };
+
+  reader.readAsDataURL(file);
+});
+
+photoPreview.addEventListener("mousedown", e => {
+  if (!photoPreviewImg.src) return;
+
+  isDragging = true;
+  startX = e.clientX;
+  startY = e.clientY;
+});
+
+window.addEventListener("mousemove", e => {
+  if (!isDragging) return;
+
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+
+  photoX -= dx * 0.25;
+  photoY -= dy * 0.25;
+
+  startX = e.clientX;
+  startY = e.clientY;
+
+  updatePhotoPosition();
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+</script>
+
+</body>
+</html>

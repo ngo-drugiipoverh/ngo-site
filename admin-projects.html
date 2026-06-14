@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Адмінка — Проєкти</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+body{
+min-height:100vh;
+padding:48px;
+color:white;
+background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 45%,#7c3aed 100%);
+}
+.container{max-width:1200px;margin:auto}
+h1{font-size:42px;margin-bottom:28px}
+.card{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.12);
+border-radius:28px;
+padding:30px;
+backdrop-filter:blur(18px);
+}
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:28px;
+}
+input,textarea,select{
+width:100%;
+padding:15px 16px;
+border:none;
+border-radius:15px;
+background:rgba(255,255,255,.09);
+color:white;
+outline:none;
+font-size:15px;
+}
+option{color:#111}
+textarea{min-height:100px;resize:vertical}
+.full{grid-column:1/-1}
+button{
+border:none;
+border-radius:15px;
+padding:14px 20px;
+font-weight:800;
+cursor:pointer;
+color:white;
+background:#3b82f6;
+}
+.projects-list{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:20px;
+}
+.project-item{
+background:rgba(255,255,255,.08);
+border-radius:24px;
+overflow:hidden;
+}
+.project-item img{
+width:100%;
+height:180px;
+object-fit:cover;
+display:block;
+}
+.project-body{padding:18px}
+.project-body h3{font-size:22px;margin-bottom:8px}
+.project-body p{opacity:.78;line-height:1.5;margin-bottom:10px}
+.actions{display:flex;gap:10px;margin-top:14px}
+.delete-btn{background:#ef4444}
+.edit-btn{background:#f59e0b}
+@media(max-width:800px){form{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Адмінка — Проєкти</h1>
+
+<div class="card">
+
+<form id="projectForm" enctype="multipart/form-data">
+
+<input type="hidden" name="id">
+
+<input name="title" placeholder="Назва проєкту" required>
+
+<input name="slug" placeholder="slug" required>
+
+<textarea class="full" name="short_description" placeholder="Короткий опис"></textarea>
+
+<textarea class="full" name="full_description" placeholder="Повний опис"></textarea>
+
+<select name="status">
+<option value="active">Активний</option>
+<option value="completed">Завершений</option>
+<option value="paused">Пауза</option>
+</select>
+
+<input type="number" name="sort_order" placeholder="Порядок" value="0">
+
+<input type="date" name="start_date">
+
+<input type="date" name="end_date">
+
+<input class="full" type="file" name="cover" accept="image/*">
+
+<button class="full" type="submit">Зберегти</button>
+
+</form>
+
+<div id="projectsList" class="projects-list"></div>
+
+</div>
+</div>
+
+<script>
+const API = "http://localhost:5000/api/projects";
+
+const form = document.getElementById("projectForm");
+const list = document.getElementById("projectsList");
+
+let editingId = null;
+
+async function loadProjects(){
+  const response = await fetch(API);
+  const data = await response.json();
+
+  list.innerHTML = data.map(project => `
+    <div class="project-item">
+      <img
+        src="${project.cover_image_url ? "http://localhost:5000" + project.cover_image_url : "team-placeholder.avif"}"
+        alt="${project.title}"
+      >
+
+      <div class="project-body">
+        <h3>${project.title}</h3>
+        <p>${project.short_description || ""}</p>
+        <p><b>Статус:</b> ${project.status || ""}</p>
+
+        <div class="actions">
+          <button class="edit-btn" type="button" onclick='editProject(${JSON.stringify(project)})'>
+            Редагувати
+          </button>
+
+          <button class="delete-btn" type="button" onclick="deleteProject('${project.id}')">
+            Видалити
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function editProject(project){
+  editingId = project.id;
+
+  form.elements.id.value = project.id || "";
+  form.elements.title.value = project.title || "";
+  form.elements.slug.value = project.slug || "";
+  form.elements.short_description.value = project.short_description || "";
+  form.elements.full_description.value = project.full_description || "";
+  form.elements.status.value = project.status || "active";
+  form.elements.sort_order.value = project.sort_order || 0;
+  form.elements.start_date.value = project.start_date ? project.start_date.slice(0,10) : "";
+  form.elements.end_date.value = project.end_date ? project.end_date.slice(0,10) : "";
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+async function deleteProject(id){
+  if(!confirm("Видалити проєкт?")) return;
+
+  await fetch(API + "/" + id, {
+    method:"DELETE"
+  });
+
+  loadProjects();
+}
+
+form.onsubmit = async e => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  const method = editingId ? "PUT" : "POST";
+  const url = editingId ? API + "/" + editingId : API;
+
+  const response = await fetch(url, {
+    method,
+    body: formData
+  });
+
+  const result = await response.json();
+
+  if(!response.ok){
+    alert(result.error || "Помилка");
+    return;
+  }
+
+  form.reset();
+  editingId = null;
+
+  loadProjects();
+};
+
+loadProjects();
+</script>
+
+</body>
+</html>

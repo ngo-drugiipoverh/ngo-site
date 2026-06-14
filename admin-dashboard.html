@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #1e293b 0%, #0f172a 60%);
+      color:white;
+      min-height:100vh;
+      display:flex;
+    }
+
+    .sidebar{
+      width:260px;
+      min-height:100vh;
+      background:rgba(15,23,42,0.95);
+      border-right:1px solid rgba(255,255,255,0.08);
+      padding:30px 20px;
+      backdrop-filter:blur(12px);
+      position:sticky;
+      top:0;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:bold;
+      margin-bottom:34px;
+      text-align:center;
+      color:#38bdf8;
+    }
+
+    .menu{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:white;
+      background:rgba(255,255,255,0.05);
+      padding:16px 18px;
+      border-radius:14px;
+      transition:0.2s;
+      border:1px solid transparent;
+      font-weight:700;
+    }
+
+    .menu a:hover{
+      background:rgba(56,189,248,0.12);
+      border-color:#38bdf8;
+      transform:translateX(4px);
+    }
+
+    .site-link{
+      background:rgba(56,189,248,0.18) !important;
+      border-color:rgba(56,189,248,0.35) !important;
+    }
+
+    .content{
+      flex:1;
+      padding:50px;
+      overflow:hidden;
+    }
+
+    .title{
+      font-size:42px;
+      margin-bottom:14px;
+    }
+
+    .subtitle{
+      opacity:0.7;
+      margin-bottom:40px;
+      font-size:17px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:24px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:24px;
+      padding:30px;
+      transition:0.25s;
+      backdrop-filter:blur(10px);
+      min-height:210px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:#38bdf8;
+      background:rgba(56,189,248,0.08);
+    }
+
+    .card h2{
+      margin-bottom:12px;
+      font-size:24px;
+    }
+
+    .card p{
+      opacity:0.75;
+      line-height:1.5;
+      margin-bottom:20px;
+    }
+
+    .card a{
+      display:inline-block;
+      width:max-content;
+      text-decoration:none;
+      color:white;
+      background:#38bdf8;
+      padding:10px 18px;
+      border-radius:12px;
+      transition:0.2s;
+      font-weight:bold;
+    }
+
+    .card a:hover{
+      background:#0ea5e9;
+    }
+
+    @media(max-width:900px){
+      body{
+        display:block;
+      }
+
+      .sidebar{
+        width:100%;
+        min-height:auto;
+        position:relative;
+      }
+
+      .content{
+        padding:28px;
+      }
+
+      .title{
+        font-size:32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">NGO ADMIN</div>
+
+    <nav class="menu">
+      <a class="site-link" href="index.html">🏠 На сайт</a>
+      <a href="admin-team.html">👥 Команда</a>
+      <a href="admin-about.html">👥 Про нас</a>
+      <a href="admin-news.html">📰 Новини</a>
+      <a href="admin-projects.html">📁 Проєкти</a>
+      <a href="admin-directions.html">📁 Напрями роботи</a>
+      <a href="admin-spaces.html">🏢 Простори</a>
+      <a href="admin-opportunities.html">🏢 Можливості</a>
+      <a href="admin-bookcrossing.html">📚 Буккросинг</a>
+      <a href="admin-partners.html">🤝 Партнери</a>
+      <a href="admin-contacts.html">📨 Заявки</a>
+      <a href="admin-home.html">🌐 Головна сторінка</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1 class="title">Адміністративна панель</h1>
+
+    <p class="subtitle">
+      Керування контентом веб-сайту громадської організації
+    </p>
+
+    <section class="cards">
+      <div class="card">
+        <div>
+          <h2>👥 Команда</h2>
+          <p>Додавання, редагування та видалення учасників команди.</p>
+        </div>
+        <a href="admin-team.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>👥 Про нас</h2>
+          <p>Редагування інформації про організацію, місію та напрями діяльності.</p>
+        </div>
+        <a href="admin-about.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>📰 Новини</h2>
+          <p>Керування новинами та інформаційними публікаціями.</p>
+        </div>
+        <a href="admin-news.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>📁 Проєкти</h2>
+          <p>Створення та редагування проєктів організації.</p>
+        </div>
+        <a href="admin-projects.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>📁 Напрями роботи</h2>
+          <p>Керування основними напрямами роботи організації.</p>
+        </div>
+        <a href="admin-directions.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>🏢 Простори</h2>
+          <p>Інформація про доступні простори та локації.</p>
+        </div>
+        <a href="admin-spaces.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>🏢 Можливості</h2>
+          <p>Додавання актуальних можливостей для молоді.</p>
+        </div>
+        <a href="admin-opportunities.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>📚 Буккросинг</h2>
+          <p>Керування книгами та бібліотечним фондом.</p>
+        </div>
+        <a href="admin-bookcrossing.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>🤝 Партнери</h2>
+          <p>Редагування інформації про партнерів організації.</p>
+        </div>
+        <a href="admin-partners.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>📨 Заявки</h2>
+          <p>Перегляд повідомлень, заявок і контактних звернень.</p>
+        </div>
+        <a href="admin-contacts.html">Відкрити</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <h2>🌐 Головна сторінка</h2>
+          <p>Керування головним блоком, місією, візією та показниками.</p>
+        </div>
+        <a href="admin-home.html">Відкрити</a>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
