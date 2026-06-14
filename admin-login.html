@@ -151,63 +151,38 @@ required
 </main>
 
 <script>
-const form =
-document.getElementById("loginForm");
+const form = document.getElementById("loginForm");
+const message = document.getElementById("loginMessage");
 
-const message =
-document.getElementById("loginMessage");
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-form.addEventListener("submit", async e => {
-e.preventDefault();
+  message.textContent = "Вхід...";
 
-message.textContent =
-"Вхід...";
+  const data = Object.fromEntries(new FormData(form));
 
-const data =
-Object.fromEntries(
-new FormData(form)
-);
+  try {
+    const response = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
 
-try{
+    const result = await response.json();
 
-const response =
-await fetch(
-"/api/admin/login"",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-}
-);
+    if (!response.ok) {
+      throw new Error(result.error || "Помилка входу");
+    }
 
-const result =
-await response.json();
+    localStorage.setItem("isAdmin", "true");
+    localStorage.setItem("adminEmail", result.admin.email);
 
-if(!response.ok){
-throw new Error(result.error || "Помилка входу");
-}
-
-localStorage.setItem(
-"isAdmin",
-"true"
-);
-
-localStorage.setItem(
-"adminEmail",
-result.admin.email
-);
-
-window.location.href =
-"admin-dashboard.html";
-
-}catch(error){
-
-message.textContent =
-"Помилка: " + error.message;
-
-}
+    window.location.href = "/admin-dashboard.html";
+  } catch (error) {
+    message.textContent = "Помилка: " + error.message;
+  }
 });
 </script>
 
