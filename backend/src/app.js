@@ -31,6 +31,14 @@ app.use(express.json());
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
+const frontendPath = path.join(__dirname, "../../");
+
+app.use(express.static(frontendPath));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
