@@ -102,7 +102,7 @@ if (localStorage.getItem("isAdmin") !== "true") {
 }
 
 const API =
-"http://localhost:5000/api/team";
+"/api/team";
 
 const form =
 document.getElementById("teamForm");
@@ -142,7 +142,7 @@ members.map(member => `
 
 <div class="member-photo">
 <img
-src="${member.photo_url ? "http://localhost:5000" + member.photo_url : "team-placeholder.avif"}"
+src="${member.photo_url ? member.photo_url : "team-placeholder.avif"}"
 alt="${member.first_name || ""} ${member.last_name || ""}"
 >
 </div>
@@ -237,7 +237,7 @@ form.photo_position_x.value = photoX;
 form.photo_position_y.value = photoY;
 
 if (member.photo_url) {
-  photoPreviewImg.src = "http://localhost:5000" + member.photo_url;
+  photoPreviewImg.src = member.photo_url;
   photoPreviewImg.style.display = "block";
   updatePhotoPosition();
 }
@@ -355,6 +355,8 @@ document
 .addEventListener("click", () => {
 form.reset();
 form.elements["id"].value = "";
+photoPreviewImg.src = "";
+photoPreviewImg.style.display = "none";
 form.photo_position_x.value = 50;
 form.photo_position_y.value = 50;
 message.textContent = "";
