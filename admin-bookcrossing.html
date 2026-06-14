@@ -109,7 +109,7 @@ class="team-grid"
 
 <script>
 const API =
-"http://localhost:5000/api/library";
+"/api/library";
 
 const libraryForm =
 document.getElementById(
@@ -140,7 +140,7 @@ async function loadItems() {
           <img
             src="${
               item.cover_image_url
-                ? "http://localhost:5000" + item.cover_image_url
+                ? item.cover_image_url
                 : "team-placeholder.avif"
             }"
             alt="${item.title}"
