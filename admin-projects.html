@@ -119,7 +119,7 @@ display:block;
 </div>
 
 <script>
-const API = "http://localhost:5000/api/projects";
+const API = "/api/projects";
 
 const form = document.getElementById("projectForm");
 const list = document.getElementById("projectsList");
@@ -133,7 +133,7 @@ async function loadProjects(){
   list.innerHTML = data.map(project => `
     <div class="project-item">
       <img
-        src="${project.cover_image_url ? "http://localhost:5000" + project.cover_image_url : "team-placeholder.avif"}"
+        src="${project.cover_image_url ? project.cover_image_url : "team-placeholder.avif"}"
         alt="${project.title}"
       >
 
