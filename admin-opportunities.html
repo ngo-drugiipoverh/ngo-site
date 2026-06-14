@@ -244,7 +244,7 @@ body{padding:24px}
 </div>
 
 <script>
-const API = "http://localhost:5000/api/opportunities";
+const API = "/api/opportunities";
 
 const pageForm = document.getElementById("pageForm");
 const opportunityForm = document.getElementById("opportunityForm");
@@ -274,7 +274,7 @@ itemsList.innerHTML = (data.opportunities || []).map(item => `
 <div class="item-card">
 
 <img
-src="${item.cover_image_url ? "http://localhost:5000" + item.cover_image_url : "team-placeholder.avif"}"
+src="${item.cover_image_url ? item.cover_image_url : "team-placeholder.avif"}"
 alt="${item.title}"
 >
 
