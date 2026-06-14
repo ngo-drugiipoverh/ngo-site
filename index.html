@@ -390,27 +390,26 @@ async function loadHomePage() {
 
 loadHomePage();
 
-let clickCount = 0;
-let clickTimer;
+let adminClickCount = 0;
+let adminClickTimer;
 
-const adminSecret =
-document.getElementById("adminSecret");
+document.addEventListener("click", (event) => {
+  const footer = event.target.closest(".site-footer");
 
-if (adminSecret) {
-  adminSecret.addEventListener("click", () => {
-    clickCount++;
+  if (!footer) return;
 
-    clearTimeout(clickTimer);
+  adminClickCount++;
 
-    clickTimer = setTimeout(() => {
-      clickCount = 0;
-    }, 2000);
+  clearTimeout(adminClickTimer);
 
-    if (clickCount >= 5) {
-      window.location.href = "admin-login.html";
-    }
-  });
-}
+  adminClickTimer = setTimeout(() => {
+    adminClickCount = 0;
+  }, 2500);
+
+  if (adminClickCount >= 5) {
+    window.location.href = "/admin-login.html";
+  }
+});
 
 </script>
 </body>
