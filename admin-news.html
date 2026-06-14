@@ -169,7 +169,7 @@ class="news-grid"
 
 <script>
 const API =
-'http://localhost:5000/api/news';
+'/api/news';
 
 let editingId = null;
 
@@ -189,7 +189,7 @@ data.map(item=>`
 <img
 src="${
 item.cover_image_url
-? 'http://localhost:5000'+item.cover_image_url
+? item.cover_image_url
 : 'team-placeholder.avif'
 }"
 >
