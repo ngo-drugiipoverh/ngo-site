@@ -23,7 +23,8 @@ const directionsRoutes = require("./routes/directions");
 const app = express();
 
 app.use(helmet({
-  crossOriginResourcePolicy: false
+  crossOriginResourcePolicy: false,
+  contentSecurityPolicy: false
 }));
 app.use(cors());
 app.use(morgan("dev"));
