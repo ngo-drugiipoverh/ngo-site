@@ -1,0 +1,862 @@
+erDiagram
+
+    %% ============================================================
+    %% БД Інформаційної системи ГО "Олександрійська молодь"
+    %% Сайт + Платформа + Телеграм-бот
+    %% PostgreSQL — Повна ER-діаграма
+    %% ============================================================
+
+    %% ==================== КОРИСТУВАЧІ БОТА ====================
+
+    users {
+        uuid id PK "UUID v4"
+        bigint telegram_id UK "Telegram User ID"
+        varchar telegram_username "Username в Telegram"
+        varchar first_name "Ім'я"
+        varchar last_name "Прізвище"
+        date birth_date "Дата народження"
+        varchar phone "Номер телефону"
+        uuid level_id FK "Поточний рівень"
+        int visit_count "Кількість відвідувань"
+        boolean is_profile_complete "Профіль заповнений"
+        boolean is_blocked "Заблокований адміном"
+        varchar blocked_reason "Причина блокування"
+        uuid blocked_by FK "Хто заблокував"
+        timestamp blocked_at "Коли заблокований"
+        boolean is_active "Активний (30 днів)"
+        timestamp last_activity_at "Остання активність"
+        timestamp bot_started_at "Перший /start"
+        timestamp registered_at "Дата реєстрації профілю"
+        timestamp created_at "Створено"
+        timestamp updated_at "Оновлено"
+    }
+
+    user_levels {
+        uuid id PK
+        varchar name UK "Назва рівня: фоловер, середнячок, продвинутий"
+        varchar slug UK "Системний ідентифікатор"
+        int min_visits "Мінімум відвідувань для рівня"
+        int max_visits "Максимум відвідувань (null = без ліміту)"
+        int sort_order "Порядок сортування"
+        varchar description "Опис рівня"
+        varchar badge_icon "Іконка рівня"
+        boolean is_active "Активний"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== АДМІНІСТРАТОРИ ПЛАТФОРМИ ====================
+
+    admin_users {
+        uuid id PK
+        varchar email UK "Email (Google OAuth)"
+        varchar google_id UK "Google Account ID"
+        varchar first_name "Ім'я"
+        varchar last_name "Прізвище"
+        varchar avatar_url "URL аватара з Google"
+        uuid role_id FK "Роль на платформі"
+        boolean is_active "Активний"
+        timestamp last_login_at "Останній вхід"
+        timestamp last_activity_at "Остання активність"
+        timestamp invited_at "Дата запрошення"
+        uuid invited_by FK "Хто запросив"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    admin_roles {
+        uuid id PK
+        varchar name UK "super_admin, admin, moderator, observer"
+        varchar display_name "Відображувана назва"
+        varchar description "Опис ролі"
+        jsonb permissions "JSON масив дозволів"
+        int access_level "Числовий рівень доступу 1-4"
+        timestamp created_at
+    }
+
+    admin_invitations {
+        uuid id PK
+        varchar email "Email запрошеного"
+        uuid role_id FK "Призначена роль"
+        uuid invited_by FK "Хто запросив"
+        varchar token UK "Унікальний токен запрошення"
+        varchar status "pending, accepted, expired, revoked"
+        timestamp expires_at "Термін дії"
+        timestamp accepted_at "Коли прийнято"
+        timestamp created_at
+    }
+
+    admin_sessions {
+        uuid id PK
+        uuid admin_user_id FK
+        varchar session_token UK "Токен сесії"
+        varchar ip_address "IP адреса"
+        varchar user_agent "Браузер"
+        timestamp expires_at "8 годин від останньої активності"
+        boolean is_active
+        timestamp created_at
+        timestamp last_active_at
+    }
+
+    %% ==================== ЗАХОДИ ====================
+
+    events {
+        uuid id PK
+        varchar title "Назва заходу"
+        text short_description "Короткий опис"
+        text full_description "Повний опис"
+        uuid event_type_id FK "Тип заходу"
+        timestamp starts_at "Дата і час початку"
+        timestamp ends_at "Дата і час завершення"
+        uuid space_id FK "Місце проведення (простір)"
+        varchar custom_location "Довільне місце (якщо не простір)"
+        int participant_limit "Ліміт учасників (0 = без ліміту)"
+        boolean waitlist_enabled "Черговий список увімкнено"
+        varchar status "draft, published, cancelled, completed"
+        uuid cover_image_id FK "Обкладинка заходу"
+        boolean is_published "Опубліковано"
+        timestamp published_at "Коли опубліковано"
+        uuid created_by FK "Хто створив"
+        uuid updated_by FK "Хто останній редагував"
+        boolean is_deleted "Soft delete"
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    event_types {
+        uuid id PK
+        varchar name UK "лекція, воркшоп, нетворкінг тощо"
+        varchar slug UK
+        varchar color "HEX колір для UI"
+        varchar icon "Іконка"
+        int sort_order
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    event_registrations {
+        uuid id PK
+        uuid event_id FK
+        uuid user_id FK
+        varchar status "registered, confirmed, cancelled, waitlisted"
+        boolean is_anonymous "Анонімна реєстрація (без профілю)"
+        int waitlist_position "Позиція в черзі (null якщо не в черзі)"
+        varchar registration_source "bot, platform_manual"
+        timestamp registered_at "Коли зареєструвався"
+        timestamp confirmed_at "Коли підтвердив"
+        timestamp cancelled_at "Коли скасував"
+        timestamp promoted_from_waitlist_at "Коли просунувся з черги"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    event_attendance {
+        uuid id PK
+        uuid event_id FK
+        uuid user_id FK
+        uuid registration_id FK
+        boolean attended "Прийшов чи ні"
+        uuid marked_by FK "Хто відмітив (адмін)"
+        timestamp marked_at "Коли відмітив"
+        timestamp created_at
+    }
+
+    event_photos {
+        uuid id PK
+        uuid event_id FK
+        uuid file_id FK "Посилання на файл"
+        int sort_order "Порядок відображення"
+        uuid uploaded_by FK "Хто завантажив"
+        boolean is_deleted
+        timestamp deleted_at
+        timestamp created_at
+    }
+
+    %% ==================== ФІДБЕКИ ====================
+
+    feedbacks {
+        uuid id PK
+        uuid event_id FK "Захід"
+        uuid user_id FK "Користувач"
+        int rating "Оцінка 1-5 зірок"
+        text comment "Текстовий коментар"
+        varchar source "bot, site"
+        boolean is_visible "Видимий (модерація)"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== КОМУНІКАЦІЯ ====================
+
+    messages {
+        uuid id PK
+        uuid user_id FK "Відправник (користувач бота)"
+        text message_text "Текст повідомлення"
+        varchar status "new, viewed, replied"
+        uuid viewed_by FK "Хто переглянув"
+        timestamp viewed_at "Коли переглянуто"
+        timestamp created_at
+    }
+
+    message_replies {
+        uuid id PK
+        uuid message_id FK "Відповідь на повідомлення"
+        uuid admin_user_id FK "Хто відповів"
+        text reply_text "Текст відповіді"
+        boolean is_sent "Відправлено в бот"
+        timestamp sent_at "Коли відправлено в бот"
+        timestamp created_at
+    }
+
+    broadcasts {
+        uuid id PK
+        varchar title "Заголовок"
+        text message_text "Текст розсилки"
+        uuid image_id FK "Прикріплене фото"
+        varchar audience_type "all, event, level"
+        uuid audience_event_id FK "Конкретний захід (якщо event)"
+        uuid audience_level_id FK "Конкретний рівень (якщо level)"
+        varchar status "draft, scheduled, sending, sent, failed"
+        timestamp scheduled_at "Запланований час"
+        timestamp sent_at "Фактично надіслано"
+        int total_recipients "Загальна кількість отримувачів"
+        int delivered_count "Скільки доставлено"
+        int failed_count "Скільки не доставлено"
+        uuid created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    broadcast_recipients {
+        uuid id PK
+        uuid broadcast_id FK
+        uuid user_id FK
+        varchar delivery_status "pending, delivered, failed"
+        varchar error_message "Помилка доставки"
+        timestamp delivered_at
+        timestamp created_at
+    }
+
+    %% ==================== ШЕДУЛЕРИ ====================
+
+    scheduler_templates {
+        uuid id PK
+        varchar slug UK "new_event, weekly_digest, pre_event_reminder, post_event_feedback, incomplete_profile"
+        varchar name "Назва шедулера"
+        varchar description "Опис"
+        text message_template "Шаблон повідомлення з плейсхолдерами"
+        varchar trigger_type "event_publish, cron, time_before_event, time_after_event, user_register"
+        varchar cron_expression "Cron вираз (для cron типу)"
+        int offset_minutes "Зсув у хвилинах (до/після заходу)"
+        varchar audience_type "all, registered, new_users"
+        boolean is_active "Увімкнений"
+        uuid updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    scheduler_logs {
+        uuid id PK
+        uuid template_id FK "Шаблон шедулера"
+        uuid event_id FK "Пов'язаний захід (якщо є)"
+        varchar status "triggered, sending, completed, failed"
+        int recipients_count "Кількість отримувачів"
+        int delivered_count "Скільки доставлено"
+        text error_details "Деталі помилки"
+        timestamp triggered_at "Коли спрацював"
+        timestamp completed_at "Коли завершив"
+        timestamp created_at
+    }
+
+    %% ==================== ЗАЯВКИ ====================
+
+    team_join_applications {
+        uuid id PK
+        uuid user_id FK "Заявник (користувач бота)"
+        varchar applicant_name "Ім'я (якщо без профілю)"
+        varchar applicant_contact "Контакт"
+        varchar status "new, reviewing, accepted, rejected"
+        text admin_notes "Внутрішні нотатки адміна"
+        uuid reviewed_by FK "Хто розглянув"
+        timestamp reviewed_at "Коли розглянуто"
+        varchar source "bot, site, google_form"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    application_questions {
+        uuid id PK
+        varchar question_text "Текст питання"
+        varchar question_type "text, select, multiselect, textarea"
+        jsonb options "Варіанти відповіді (для select)"
+        int sort_order
+        boolean is_required "Обов'язкове"
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    application_answers {
+        uuid id PK
+        uuid application_id FK
+        uuid question_id FK
+        text answer_text "Відповідь"
+        timestamp created_at
+    }
+
+    space_booking_requests {
+        uuid id PK
+        varchar event_name "Назва події"
+        text event_description "Опис"
+        uuid space_id FK "Простір для бронювання"
+        date booking_date "Дата"
+        time start_time "Час початку"
+        time end_time "Час завершення"
+        varchar contact_name "Контактна особа"
+        varchar contact_phone "Телефон"
+        varchar contact_email "Email"
+        uuid user_id FK "Користувач бота (якщо є)"
+        varchar status "new, reviewing, confirmed, rejected"
+        text admin_notes "Нотатки адміна"
+        uuid reviewed_by FK
+        timestamp reviewed_at
+        varchar source "bot, site"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== ПРОСТОРИ ====================
+
+    spaces {
+        uuid id PK
+        varchar name UK "Другий поверх, Space Space"
+        varchar slug UK "drugyy-poverh, space-space"
+        text description "Опис простору"
+        text short_description "Короткий опис"
+        varchar address "Адреса"
+        uuid cover_image_id FK "Головне фото"
+        jsonb schedule "Розклад роботи (JSON)"
+        boolean has_coworking "Зона коворкінгу"
+        boolean has_studio "Аудіовізуальна студія"
+        varchar studio_name "Назва студії"
+        text studio_description "Опис студії"
+        int sort_order
+        boolean is_active
+        boolean is_deleted
+        timestamp deleted_at
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    space_photos {
+        uuid id PK
+        uuid space_id FK
+        uuid file_id FK
+        int sort_order
+        varchar caption "Підпис до фото"
+        timestamp created_at
+    }
+
+    space_weekly_formats {
+        uuid id PK
+        uuid space_id FK
+        varchar name "Назва формату"
+        text description "Опис"
+        varchar day_of_week "monday, tuesday, ..."
+        time start_time "Час початку"
+        time end_time "Час завершення"
+        uuid cover_image_id FK
+        int sort_order
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== КОНТЕНТ САЙТУ ====================
+
+    site_pages {
+        uuid id PK
+        varchar slug UK "home, about, what-we-do, contacts"
+        varchar title "Заголовок сторінки"
+        text meta_description "SEO опис"
+        varchar meta_keywords "SEO ключові слова"
+        boolean is_published
+        int sort_order
+        uuid parent_page_id FK "Батьківська сторінка"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    site_content_blocks {
+        uuid id PK
+        uuid page_id FK "Сторінка"
+        varchar block_key UK "mission, vision, values, intro, counters"
+        varchar block_type "text, html, json, image"
+        text content "Контент блоку"
+        jsonb metadata "Додаткові параметри"
+        int sort_order
+        uuid updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    site_counters {
+        uuid id PK
+        varchar label "Назва лічильника"
+        varchar icon "Іконка"
+        int value "Значення"
+        varchar suffix "заходів, учасників..."
+        boolean is_auto "Авторозрахунок"
+        varchar auto_source "events_count, users_count..."
+        int sort_order
+        boolean is_visible
+        timestamp updated_at
+        timestamp created_at
+    }
+
+    %% ==================== КОМАНДА (САЙТ) ====================
+
+    team_members {
+        uuid id PK
+        varchar first_name "Ім'я"
+        varchar last_name "Прізвище"
+        varchar role_title "Посада / роль в ГО"
+        text bio "Біографія / опис"
+        uuid photo_id FK "Фото"
+        varchar instagram_url "Посилання Instagram"
+        varchar telegram_url "Посилання Telegram"
+        int sort_order "Порядок відображення (drag-and-drop)"
+        boolean is_visible "Видимий на сайті"
+        boolean is_deleted
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== НОВИНИ / ПУБЛІКАЦІЇ ====================
+
+    publications {
+        uuid id PK
+        varchar title "Заголовок"
+        text excerpt "Короткий опис"
+        text content "Повний текст"
+        uuid cover_image_id FK "Обкладинка"
+        uuid category_id FK "Категорія"
+        varchar status "draft, published, scheduled, hidden"
+        timestamp published_at "Дата публікації"
+        timestamp scheduled_at "Заплановано на"
+        varchar slug UK "URL slug"
+        uuid created_by FK
+        uuid updated_by FK
+        boolean is_deleted
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    publication_categories {
+        uuid id PK
+        varchar name UK "Анонс, Подія, Навчання тощо"
+        varchar slug UK
+        varchar color "HEX колір"
+        int sort_order
+        boolean is_active
+        timestamp created_at
+    }
+
+    publication_photos {
+        uuid id PK
+        uuid publication_id FK
+        uuid file_id FK
+        int sort_order
+        varchar caption
+        timestamp created_at
+    }
+
+    %% ==================== ПРОЄКТИ ====================
+
+    projects {
+        uuid id PK
+        varchar title "Назва проєкту"
+        text short_description "Короткий опис"
+        text full_description "Повний опис"
+        uuid cover_image_id FK "Обкладинка"
+        varchar status "active, completed, paused"
+        date start_date "Дата початку"
+        date end_date "Дата завершення"
+        varchar slug UK
+        int sort_order
+        uuid created_by FK
+        boolean is_deleted
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    project_photos {
+        uuid id PK
+        uuid project_id FK
+        uuid file_id FK
+        int sort_order
+        varchar caption
+        timestamp created_at
+    }
+
+    %% ==================== ПАРТНЕРИ ====================
+
+    partners {
+        uuid id PK
+        varchar name "Назва партнера"
+        uuid logo_id FK "Логотип"
+        varchar website_url "Посилання на сайт"
+        text description "Опис партнерства"
+        int sort_order "Порядок відображення"
+        boolean is_visible "Видимий"
+        boolean is_deleted
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== БІБЛІОТЕКА ====================
+
+    library_items {
+        uuid id PK
+        varchar title "Назва"
+        varchar item_type "book, board_game, ps5_game"
+        varchar author "Автор (для книг)"
+        varchar genre "Жанр"
+        text description "Опис"
+        uuid cover_image_id FK "Фото обкладинки"
+        varchar availability_status "available, borrowed, unavailable"
+        varchar borrowed_by "Хто взяв (текст)"
+        uuid borrowed_by_user_id FK "Хто взяв (користувач)"
+        date borrowed_at "Коли видано"
+        date expected_return_date "Очікувана дата повернення"
+        uuid space_id FK "До якого простору належить"
+        int sort_order
+        boolean is_deleted
+        timestamp deleted_at
+        uuid deleted_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    library_borrow_history {
+        uuid id PK
+        uuid item_id FK "Предмет бібліотеки"
+        uuid user_id FK "Хто брав"
+        varchar borrower_name "Ім'я (якщо не користувач бота)"
+        date borrowed_at "Дата видачі"
+        date returned_at "Дата повернення"
+        text notes "Примітки"
+        uuid issued_by FK "Хто видав (адмін)"
+        timestamp created_at
+    }
+
+    %% ==================== ФАЙЛИ / МЕДІА ====================
+
+    files {
+        uuid id PK
+        varchar original_name "Оригінальна назва файлу"
+        varchar stored_name "Збережена назва"
+        varchar mime_type "image/jpeg, image/png, application/pdf"
+        varchar file_path "Шлях до файлу"
+        varchar thumbnail_path "Шлях до мініатюри"
+        bigint file_size "Розмір у байтах"
+        int width "Ширина (для зображень)"
+        int height "Висота (для зображень)"
+        varchar alt_text "ALT текст (для SEO)"
+        varchar entity_type "event, space, team_member, publication..."
+        uuid entity_id "ID пов'язаної сутності"
+        uuid uploaded_by FK "Хто завантажив"
+        timestamp created_at
+    }
+
+    %% ==================== ЖУРНАЛ ДІЙ ====================
+
+    audit_logs {
+        uuid id PK
+        uuid admin_user_id FK "Хто виконав дію"
+        varchar action "create, update, delete, restore, login, logout"
+        varchar entity_type "event, user, publication, team_member..."
+        uuid entity_id "ID сутності"
+        varchar entity_name "Назва сутності (для відображення)"
+        jsonb old_values "Старі значення (JSON)"
+        jsonb new_values "Нові значення (JSON)"
+        varchar ip_address "IP адреса"
+        varchar user_agent "Браузер"
+        text description "Людиночитаний опис дії"
+        timestamp created_at
+    }
+
+    %% ==================== НАЛАШТУВАННЯ ====================
+
+    organization_settings {
+        uuid id PK
+        varchar key UK "org_name, phone, email, instagram, telegram, address_1, address_2"
+        varchar value "Значення"
+        varchar display_name "Назва для UI"
+        varchar group_name "general, contacts, social, integrations"
+        varchar value_type "text, url, phone, email"
+        int sort_order
+        uuid updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    integration_settings {
+        uuid id PK
+        varchar provider UK "google_oauth, google_sheets, google_forms, telegram_bot"
+        varchar display_name "Назва інтеграції"
+        jsonb config "Конфігурація (зашифрована)"
+        boolean is_active "Увімкнена"
+        timestamp last_synced_at "Остання синхронізація"
+        varchar sync_status "ok, error, never"
+        text last_error "Остання помилка"
+        uuid updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== КОШИК (SOFT DELETE) ====================
+
+    trash_bin {
+        uuid id PK
+        varchar entity_type "event, publication, team_member, partner, library_item, project"
+        uuid entity_id "ID видаленої сутності"
+        varchar entity_name "Назва (для відображення)"
+        jsonb entity_snapshot "Повний знімок даних"
+        uuid deleted_by FK "Хто видалив"
+        timestamp deleted_at "Коли видалено"
+        timestamp expires_at "Коли буде остаточно видалено (30 днів)"
+        boolean is_restored "Було відновлено"
+        timestamp restored_at
+        uuid restored_by FK
+    }
+
+    %% ==================== БОТ НОТИФІКАЦІЇ ====================
+
+    bot_notifications {
+        uuid id PK
+        uuid user_id FK "Кому"
+        varchar notification_type "event_new, event_cancel, reminder, feedback_request, waitlist_promoted, application_result, booking_result, personal_message"
+        varchar source_type "scheduler, broadcast, admin_reply, system"
+        uuid source_id "ID джерела (шедулер, розсилка, тощо)"
+        text message_text "Текст повідомлення"
+        varchar status "pending, sent, delivered, failed"
+        varchar error_message "Помилка"
+        int retry_count "Кількість спроб"
+        timestamp scheduled_at "Запланований час"
+        timestamp sent_at "Коли відправлено"
+        timestamp delivered_at "Коли доставлено"
+        timestamp created_at
+    }
+
+    %% ==================== КОНТАКТНІ ФОРМИ САЙТУ ====================
+
+    contact_form_submissions {
+        uuid id PK
+        varchar sender_name "Ім'я відправника"
+        varchar sender_email "Email"
+        varchar sender_phone "Телефон"
+        text message_text "Текст повідомлення"
+        varchar status "new, viewed, replied"
+        uuid viewed_by FK
+        timestamp viewed_at
+        varchar source "site_contacts, site_booking"
+        varchar ip_address
+        timestamp created_at
+    }
+
+    %% ==================== РЕЗЕРВНЕ КОПІЮВАННЯ ====================
+
+    backup_records {
+        uuid id PK
+        varchar backup_type "manual, daily, weekly"
+        varchar file_path "Шлях до бекапу"
+        bigint file_size "Розмір"
+        varchar status "in_progress, completed, failed"
+        text error_message
+        uuid initiated_by FK "Хто ініціював (для ручних)"
+        timestamp started_at
+        timestamp completed_at
+        timestamp created_at
+    }
+
+    backup_settings {
+        uuid id PK
+        varchar schedule_type "daily, weekly, disabled"
+        time backup_time "Час бекапу"
+        varchar day_of_week "Для щотижневого"
+        int retention_days "Скільки днів зберігати"
+        boolean is_active
+        uuid updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% ==================== ЕКСПОРТ ====================
+
+    export_logs {
+        uuid id PK
+        varchar export_type "users, registrations, feedbacks, attendances"
+        varchar format "google_sheets, csv"
+        varchar destination_url "URL Google Sheets"
+        int records_count "Кількість записів"
+        uuid exported_by FK
+        varchar status "pending, completed, failed"
+        text error_message
+        timestamp created_at
+    }
+
+    %% ============================================================
+    %% ЗВ'ЯЗКИ (RELATIONSHIPS)
+    %% ============================================================
+
+    %% --- Користувачі ---
+    users ||--o| user_levels : "має рівень"
+    users ||--o| admin_users : "заблокований ким"
+
+    %% --- Адміністратори ---
+    admin_users ||--|| admin_roles : "має роль"
+    admin_users ||--o{ admin_sessions : "має сесії"
+    admin_invitations ||--|| admin_roles : "призначена роль"
+    admin_invitations ||--|| admin_users : "запросив"
+
+    %% --- Заходи ---
+    events ||--|| event_types : "тип заходу"
+    events ||--o| spaces : "проводиться у просторі"
+    events ||--o| files : "обкладинка"
+    events ||--|| admin_users : "створив"
+    events ||--o{ event_registrations : "має реєстрації"
+    events ||--o{ event_attendance : "має відвідуваність"
+    events ||--o{ event_photos : "має фотографії"
+    events ||--o{ feedbacks : "має фідбеки"
+
+    %% --- Реєстрації ---
+    event_registrations ||--|| users : "користувач"
+    event_registrations ||--|| events : "захід"
+
+    %% --- Відвідуваність ---
+    event_attendance ||--|| users : "користувач"
+    event_attendance ||--|| events : "захід"
+    event_attendance ||--|| event_registrations : "реєстрація"
+    event_attendance ||--o| admin_users : "відмітив"
+
+    %% --- Фото заходів ---
+    event_photos ||--|| events : "захід"
+    event_photos ||--|| files : "файл"
+    event_photos ||--|| admin_users : "завантажив"
+
+    %% --- Фідбеки ---
+    feedbacks ||--|| events : "захід"
+    feedbacks ||--|| users : "користувач"
+
+    %% --- Комунікація ---
+    messages ||--|| users : "від користувача"
+    messages ||--o| admin_users : "переглянув"
+    messages ||--o{ message_replies : "має відповіді"
+    message_replies ||--|| messages : "до повідомлення"
+    message_replies ||--|| admin_users : "відповів адмін"
+
+    %% --- Розсилки ---
+    broadcasts ||--o| files : "прикріплене фото"
+    broadcasts ||--o| events : "аудиторія - захід"
+    broadcasts ||--o| user_levels : "аудиторія - рівень"
+    broadcasts ||--|| admin_users : "створив"
+    broadcasts ||--o{ broadcast_recipients : "має отримувачів"
+    broadcast_recipients ||--|| broadcasts : "розсилка"
+    broadcast_recipients ||--|| users : "отримувач"
+
+    %% --- Шедулери ---
+    scheduler_templates ||--o| admin_users : "оновив"
+    scheduler_logs ||--|| scheduler_templates : "шаблон"
+    scheduler_logs ||--o| events : "пов'язаний захід"
+
+    %% --- Заявки на вступ ---
+    team_join_applications ||--o| users : "заявник"
+    team_join_applications ||--o| admin_users : "розглянув"
+    team_join_applications ||--o{ application_answers : "має відповіді"
+    application_answers ||--|| team_join_applications : "заявка"
+    application_answers ||--|| application_questions : "питання"
+
+    %% --- Бронювання ---
+    space_booking_requests ||--|| spaces : "простір"
+    space_booking_requests ||--o| users : "користувач"
+    space_booking_requests ||--o| admin_users : "розглянув"
+
+    %% --- Простори ---
+    spaces ||--o| files : "обкладинка"
+    spaces ||--o{ space_photos : "фотографії"
+    spaces ||--o{ space_weekly_formats : "щотижневі формати"
+    space_photos ||--|| spaces : "простір"
+    space_photos ||--|| files : "файл"
+    space_weekly_formats ||--|| spaces : "простір"
+    space_weekly_formats ||--o| files : "обкладинка формату"
+
+    %% --- Контент сайту ---
+    site_pages ||--o| site_pages : "батьківська сторінка"
+    site_pages ||--o{ site_content_blocks : "блоки контенту"
+    site_content_blocks ||--|| site_pages : "сторінка"
+    site_content_blocks ||--o| admin_users : "оновив"
+
+    %% --- Команда ---
+    team_members ||--o| files : "фото"
+
+    %% --- Публікації ---
+    publications ||--o| files : "обкладинка"
+    publications ||--|| publication_categories : "категорія"
+    publications ||--|| admin_users : "створив"
+    publications ||--o{ publication_photos : "фотографії"
+    publication_photos ||--|| publications : "публікація"
+    publication_photos ||--|| files : "файл"
+
+    %% --- Проєкти ---
+    projects ||--o| files : "обкладинка"
+    projects ||--|| admin_users : "створив"
+    projects ||--o{ project_photos : "фотографії"
+    project_photos ||--|| projects : "проєкт"
+    project_photos ||--|| files : "файл"
+
+    %% --- Партнери ---
+    partners ||--o| files : "логотип"
+
+    %% --- Бібліотека ---
+    library_items ||--o| files : "обкладинка"
+    library_items ||--o| spaces : "простір"
+    library_items ||--o| users : "хто взяв"
+    library_items ||--o{ library_borrow_history : "історія видач"
+    library_borrow_history ||--|| library_items : "предмет"
+    library_borrow_history ||--o| users : "хто брав"
+    library_borrow_history ||--o| admin_users : "хто видав"
+
+    %% --- Нотифікації ---
+    bot_notifications ||--|| users : "отримувач"
+
+    %% --- Аудит ---
+    audit_logs ||--|| admin_users : "хто виконав"
+
+    %% --- Кошик ---
+    trash_bin ||--|| admin_users : "хто видалив"
+
+    %% --- Налаштування ---
+    organization_settings ||--o| admin_users : "оновив"
+    integration_settings ||--o| admin_users : "оновив"
+
+    %% --- Бекапи ---
+    backup_records ||--o| admin_users : "ініціював"
+    backup_settings ||--o| admin_users : "оновив"
+
+    %% --- Експорт ---
+    export_logs ||--|| admin_users : "експортував"
+
+    %% --- Контактні форми ---
+    contact_form_submissions ||--o| admin_users : "переглянув"
